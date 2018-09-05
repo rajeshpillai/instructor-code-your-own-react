@@ -21,17 +21,17 @@ function deleteData(item) {
   reRender();
 }
 
-function deleteData1(e) {
-  //console.log(e.target.attributes);
+// function deleteData1(e) {
+//   //console.log(e.target.attributes);
 
-  var item = e.target.attributes["data-val"].nodeValue;
-  console.log(item);
-  var data = state;
-  state = state.filter(t => {
-    return t != item;
-  });
-  reRender();
-}
+//   var item = e.target.attributes["data-val"].nodeValue;
+//   console.log(item);
+//   var data = state;
+//   state = state.filter(t => {
+//     return t != item;
+//   });
+//   reRender();
+// }
 
 function reRender() {
   let list = (
@@ -49,24 +49,24 @@ function reRender() {
     </ul>
   );
 
-  let list1 = (
-    <ul>
-      {state.map(item => {
-        return (
-          <li>
-            {item}
-            <a href="#" data-val={item} onClick={deleteData1}>
-              X
-            </a>
-          </li>
-        );
-      })}
-    </ul>
-  );
+  //   let list1 = (
+  //     <ul>
+  //       {state.map(item => {
+  //         return (
+  //           <li>
+  //             {item}
+  //             <a href="#" data-val={item} onClick={deleteData1}>
+  //               X
+  //             </a>
+  //           </li>
+  //         );
+  //       })}
+  //     </ul>
+  //   );
   let view = (
     <div>
       <input type="button" value="Add" onClick={addData} />
-      {list1}
+      {list}
     </div>
   );
   TinyReact.render(document.getElementById("root"), view);
