@@ -1,12 +1,27 @@
 /** @jsx TinyReact.h */
 
-var state = ["item1", "item2"];
+var state = ["item1", "item2", "item3"];
+
+var timer = null;
 
 function addData() {
   console.log("call updateData.....");
   var item = "item" + (state.length + 1);
   state.push(item);
   reRender();
+}
+
+function startTimer() {
+  timer = setInterval(function() {
+    console.log("call updateData.....");
+    var item = "item" + (state.length + 1);
+    state.push(item);
+    reRender();
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timer);
 }
 
 function deleteData(item) {
@@ -66,6 +81,8 @@ function reRender() {
   let view = (
     <div>
       <input type="button" value="Add" onClick={addData} />
+      <input type="button" value="Start Timer" onClick={startTimer} />
+      <input type="button" value="Stop" onClick={stopTimer} />
       {list}
     </div>
   );
