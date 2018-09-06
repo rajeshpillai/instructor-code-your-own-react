@@ -52,6 +52,16 @@ function Header(props) {
   return <h1>Hello, Functional component {props.userName}</h1>;
 }
 
+class Todo extends TinyReact.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return <div>This is Todo App</div>;
+  }
+}
+
 function reRender() {
   //   let list = (
   //     <ul>
@@ -69,6 +79,8 @@ function reRender() {
   //   );
 
   let comp = <Header userName="Urvashi" />;
+
+  let todo = <Todo />;
 
   //   let list1 = (
   //     <ul>
@@ -93,7 +105,15 @@ function reRender() {
   //     </div>
   //   );
 
-  let viewComp = <div>{comp}</div>;
+  let viewComp = (
+    <div>
+      {comp}
+      <Todo />
+    </div>
+  );
+
+  let viewTodo = <Todo />;
+
   TinyReact.render(document.getElementById("root"), viewComp);
 }
 
