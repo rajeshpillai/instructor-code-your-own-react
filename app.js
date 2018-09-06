@@ -52,12 +52,13 @@ function Header(props) {
   return <h1>Hello, Functional component {props.userName}</h1>;
 }
 
-class Todo extends TinyReact.Component {
+class TodoApp extends TinyReact.Component {
   constructor(props) {
     super(props);
     this.addToDo = this.addToDo.bind(this);
     this.state = {
-      title: props.title
+      //title: props.title,
+      tasks: ["Task 1"]
     };
     this.count = 1;
   }
@@ -65,17 +66,39 @@ class Todo extends TinyReact.Component {
   addToDo() {
     this.count += 1;
     this.setState({
-      title: " New Title " + this.count
+      //title: "New Title " + this.count,
+      tasks: [...this.state.tasks, "New Title " + this.count]
     });
+  }
+
+  render() {
+    let tasks = this.state.tasks.map(task => {
+      //   return <div>{task}</div>;
+      return <Todo task={task} />;
+    });
+    console.log("tasks", tasks);
+    return (
+      <div>
+        <div>{tasks}</div>
+        <input type="button" onClick={this.addToDo} value="Add Todo" />
+      </div>
+    );
+  }
+}
+
+class Todo extends TinyReact.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      //title: props.title,
+      task: props.task
+    };
   }
 
   render() {
     return (
       <div>
-        <div>{this.state.title} This is Task 1 Todo App</div>
-        <div>
-          <input type="button" onClick={this.addToDo} value="Add Todo" />
-        </div>
+        <div>{this.state.task}</div>
       </div>
     );
   }
@@ -127,7 +150,7 @@ function reRender() {
   let viewComp = (
     <div>
       {comp}
-      <Todo title="Task 1" />
+      <TodoApp />
     </div>
   );
 
