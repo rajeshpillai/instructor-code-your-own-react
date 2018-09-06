@@ -55,10 +55,29 @@ function Header(props) {
 class Todo extends TinyReact.Component {
   constructor(props) {
     super(props);
+    this.addToDo = this.addToDo.bind(this);
+    this.state = {
+      title: props.title
+    };
+    this.count = 1;
+  }
+
+  addToDo() {
+    this.count += 1;
+    this.setState({
+      title: " New Title " + this.count
+    });
   }
 
   render() {
-    return <div>This is Todo App</div>;
+    return (
+      <div>
+        <div>This is Todo App {this.state.title}</div>
+        <div>
+          <input type="button" onClick={this.addToDo} value="Add Todo" />
+        </div>
+      </div>
+    );
   }
 }
 
@@ -108,11 +127,11 @@ function reRender() {
   let viewComp = (
     <div>
       {comp}
-      <Todo />
+      <Todo title="Task 1" />
     </div>
   );
 
-  let viewTodo = <Todo />;
+  let viewTodo = <Todo title="Task 1" />;
 
   TinyReact.render(document.getElementById("root"), viewComp);
 }
