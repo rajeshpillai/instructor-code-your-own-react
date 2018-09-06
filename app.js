@@ -48,21 +48,27 @@ function deleteData(item) {
 //   reRender();
 // }
 
+function Header(props) {
+  return <h1>Hello, Functional component {props.userName}</h1>;
+}
+
 function reRender() {
-  let list = (
-    <ul>
-      {state.map(item => {
-        return (
-          <li>
-            {item}{" "}
-            <a href="#" onClick={() => deleteData(item)}>
-              X
-            </a>
-          </li>
-        );
-      })}
-    </ul>
-  );
+  //   let list = (
+  //     <ul>
+  //       {state.map(item => {
+  //         return (
+  //           <li>
+  //             {item}{" "}
+  //             <a href="#" onClick={() => deleteData(item)}>
+  //               X
+  //             </a>
+  //           </li>
+  //         );
+  //       })}
+  //     </ul>
+  //   );
+
+  let comp = <Header userName="Urvashi" />;
 
   //   let list1 = (
   //     <ul>
@@ -78,15 +84,17 @@ function reRender() {
   //       })}
   //     </ul>
   //   );
-  let view = (
-    <div>
-      <input type="button" value="Add" onClick={addData} />
-      <input type="button" value="Start Timer" onClick={startTimer} />
-      <input type="button" value="Stop" onClick={stopTimer} />
-      {list}
-    </div>
-  );
-  TinyReact.render(document.getElementById("root"), view);
+  //   let view = (
+  //     <div>
+  //       <input type="button" value="Add" onClick={addData} />
+  //       <input type="button" value="Start Timer" onClick={startTimer} />
+  //       <input type="button" value="Stop" onClick={stopTimer} />
+  //       {list}
+  //     </div>
+  //   );
+
+  let viewComp = <div>{comp}</div>;
+  TinyReact.render(document.getElementById("root"), viewComp);
 }
 
 reRender();
