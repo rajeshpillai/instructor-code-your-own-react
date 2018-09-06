@@ -72,7 +72,7 @@ class Todo extends TinyReact.Component {
   render() {
     return (
       <div>
-        <div>This is Todo App {this.state.title}</div>
+        <div>{this.state.title} This is Task 1 Todo App</div>
         <div>
           <input type="button" onClick={this.addToDo} value="Add Todo" />
         </div>
