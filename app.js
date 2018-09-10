@@ -92,7 +92,7 @@ class App extends TinyReact.Component {
     return (
       <div>
         <h1>Didact Stories</h1>
-        <TodoApp />
+        {/* <TodoApp /> */}
         <ul>
           {this.state.stories.map(story => {
             return (
@@ -142,9 +142,9 @@ class Story extends TinyReact.Component {
   }
 }
 
-// function Header(props) {
-//   return <h1>Hello, Functional component {props.userName}</h1>;
-// }
+// // function Header(props) {
+// //   return <h1>Hello, Functional component {props.userName}</h1>;
+// // }
 
 class TodoApp extends TinyReact.Component {
   constructor(props) {
@@ -213,6 +213,12 @@ class Todo extends TinyReact.Component {
   }
 }
 
+class MyComponent extends TinyReact.Component {
+  render() {
+    return <div>This is a custom comopnent.</div>;
+  }
+}
+
 function reRender() {
   let list = (
     <ul>
@@ -266,7 +272,7 @@ function reRender() {
 
   //   let viewTodo = <Todo title="Task 1" />;
 
-  TinyReact.render(<App />, document.getElementById("root"));
+  TinyReact.render(<TodoApp />, document.getElementById("root"));
   //TinyReact.render(document.getElementById("root"), list);
 }
 
