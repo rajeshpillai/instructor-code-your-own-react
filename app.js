@@ -153,7 +153,7 @@ class TodoApp extends TinyReact.Component {
     this.deleteTodo = this.deleteTodo.bind(this);
     this.state = {
       header: "Test",
-      tasks: ["Task 1", "Task 2"]
+      tasks: ["Task 1"]
     };
     this.count = 1;
   }
@@ -218,8 +218,6 @@ class Todo extends TinyReact.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //title: props.title,
-      task: props.task,
       editable: false,
       index: props.index
     };
@@ -234,16 +232,18 @@ class Todo extends TinyReact.Component {
   saveTask(e) {
     console.log("save Task");
     this.toggleEditableForm();
-    this.props.onEditTask(this.state.task, this.state.index);
+    this.props.onEditTask(this.input.value, this.state.index);
+    //this.props.onEditTask(this.state.task, this.state.index);
   }
 
-  onChangeTask(e) {
-    console.log(e.target.value);
-    e.preventDefault();
-    this.setState({
-      task: e.target.value
-    });
-  }
+  //   onChangeTask(e) {
+  //     console.log(e.target.value);
+  //     // alert(this.input.value);
+  //     e.preventDefault();
+  //     this.setState({
+  //       task: e.target.value
+  //     });
+  //   }
 
   render() {
     // const textBoxView = (
@@ -263,8 +263,9 @@ class Todo extends TinyReact.Component {
           <span>
             <input
               type="text"
-              value={this.state.task}
-              onChange={e => this.onChangeTask(e)}
+              value={this.props.task}
+              ref={input => (this.input = input)}
+              //   onChange={e => this.onChangeTask(e)}
             />
             <input type="button" value="Save" onClick={() => this.saveTask()} />
           </span>
@@ -275,7 +276,7 @@ class Todo extends TinyReact.Component {
 
     return (
       <div>
-        {this.state.task}
+        {this.props.task}
         <a href="#" onClick={() => this.props.onDelete(this.state.task)}>
           X
         </a>{" "}
