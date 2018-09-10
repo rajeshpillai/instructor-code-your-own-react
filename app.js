@@ -142,9 +142,9 @@ class Story extends TinyReact.Component {
   }
 }
 
-// // function Header(props) {
-// //   return <h1>Hello, Functional component {props.userName}</h1>;
-// // }
+function Header(props) {
+  return <h1>Hello, Functional component {props.userName}</h1>;
+}
 
 class TodoApp extends TinyReact.Component {
   constructor(props) {
@@ -152,7 +152,7 @@ class TodoApp extends TinyReact.Component {
     this.addToDo = this.addToDo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
     this.state = {
-      //title: props.title,
+      header: "Test",
       tasks: ["Task 1", "Task 2"]
     };
     this.count = 1;
@@ -161,7 +161,7 @@ class TodoApp extends TinyReact.Component {
   addToDo() {
     this.count += 1;
     this.setState({
-      //title: "New Title " + this.count,
+      header: "Header " + this.count,
       tasks: [...this.state.tasks, "New Title " + this.count]
     });
   }
@@ -177,14 +177,36 @@ class TodoApp extends TinyReact.Component {
     });
   }
 
+  onEditTask = (task, index) => {
+    console.log("task", task, index);
+    var tasks = this.state.tasks.map((t, i) => {
+      if (i == index) {
+        t = task;
+      }
+      return t;
+    });
+
+    this.setState({
+      tasks
+    });
+  };
+
   render() {
-    let tasks = this.state.tasks.map(task => {
+    let tasks = this.state.tasks.map((task, index) => {
       //   return <div>{task}</div>;
-      return <Todo task={task} onDelete={this.deleteTodo} />;
+      return (
+        <Todo
+          task={task}
+          index={index}
+          onDelete={this.deleteTodo}
+          onEditTask={this.onEditTask}
+        />
+      );
     });
     console.log("tasks", tasks);
     return (
       <div>
+        <Header userName={this.state.header} />
         <div>{tasks}</div>
         <input type="button" onClick={this.addToDo} value="Add Todo" />
       </div>
@@ -197,17 +219,70 @@ class Todo extends TinyReact.Component {
     super(props);
     this.state = {
       //title: props.title,
-      task: props.task
+      task: props.task,
+      editable: false,
+      index: props.index
     };
   }
 
+  toggleEditableForm() {
+    this.setState({
+      editable: !this.state.editable
+    });
+  }
+
+  saveTask(e) {
+    console.log("save Task");
+    this.toggleEditableForm();
+    this.props.onEditTask(this.state.task, this.state.index);
+  }
+
+  onChangeTask(e) {
+    console.log(e.target.value);
+    e.preventDefault();
+    this.setState({
+      task: e.target.value
+    });
+  }
+
   render() {
+    // const textBoxView = (
+    //   <span>
+    //     <input
+    //       type="text"
+    //       value={this.state.task}
+    //       onChange={e => this.onChangeTask(e)}
+    //     />
+    //     <input type="button" value="Save" onClick={() => this.saveTask()} />
+    //   </span>
+    // );
+
+    const textBoxView = () => {
+      if (this.state.editable) {
+        return (
+          <span>
+            <input
+              type="text"
+              value={this.state.task}
+              onChange={e => this.onChangeTask(e)}
+            />
+            <input type="button" value="Save" onClick={() => this.saveTask()} />
+          </span>
+        );
+      }
+      return "";
+    };
+
     return (
       <div>
         {this.state.task}
         <a href="#" onClick={() => this.props.onDelete(this.state.task)}>
           X
+        </a>{" "}
+        <a href="#" onClick={() => this.toggleEditableForm()}>
+          Edit
         </a>
+        {textBoxView()}
       </div>
     );
   }
