@@ -9,17 +9,20 @@ class TodoApp extends TinyReact.Component {
     this.deleteTodo = this.deleteTodo.bind(this);
     this.state = {
       header: "Test",
-      tasks: ["Task 1"]
+      tasks: props.tasks || ["Task 1", "Task 2"]
     };
     this.count = 1;
   }
 
   addToDo() {
+    alert("Adding todo...");
     this.count += 1;
     this.setState({
       header: "Header " + this.count,
       tasks: [...this.state.tasks, "New Title " + this.count]
     });
+
+    render(this.state.tasks); // Call global render, to force render
   }
 
   deleteTodo(task) {
@@ -155,6 +158,14 @@ const Header = function (props) {
 
 console.log("function:vdom: ", Header);
 console.log("function:render: ", TinyReact.render(<Header title="Header 1" />, root));
+
+console.log("component:vdom: ", TodoApp);
+console.log("component:render: ", TinyReact.render(<TodoApp />, root));
+
+function render(tasks) {
+  alert(JSON.stringify(tasks));
+  TinyReact.render(<TodoApp tasks={tasks} />, root);
+}
 
 //TinyReact.render(<TodoApp />, document.getElementById("root"));
 
