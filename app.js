@@ -142,10 +142,19 @@ const nestedElement = (
   </ul>
 );
 
-console.log("Nested: ", nestedElement);
+//console.log("Nested: ", nestedElement);
 console.log("nested:render: ", TinyReact.render(nestedElement, root));
 
+// Adding functional component
+const Header = function (props) {
+  let title = props.title || " <no title>";
+  return (
+    <h1>Header {title}</h1>
+  )
+}
 
+console.log("function:vdom: ", Header);
+console.log("function:render: ", TinyReact.render(<Header title="Header 1" />, root));
 
 //TinyReact.render(<TodoApp />, document.getElementById("root"));
 
