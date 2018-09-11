@@ -122,16 +122,19 @@ class Todo extends TinyReact.Component {
   }
 }
 
-console.log("Simple: ",<div className="app">Div 1</div>);
-console.log("Nested: ",
-    <ul className="todos">
-      <li className="todo-item">Task 1</li>
-      <li className="todo-item">Task 2</li>
-      <li className="todo-item">Task 3</li>
-    </ul>
+//console.log("Simple: ",<div className="app">Div 1</div>);
+//console.log("Component: ",<TodoApp />);
+
+const nestedElement = (
+  <ul className="todos">
+    <li className="todo-item">Task 1</li>
+    <li className="todo-item">Task 2</li>
+    <li className="todo-item">Task 3</li>
+  </ul>
 );
 
-console.log("Component: ",<TodoApp />);
+console.log("Nested: ", nestedElement);
+TinyReact.render(nestedElement, document.getElementById("root"));
 
-TinyReact.render(<TodoApp />, document.getElementById("root"));
+//TinyReact.render(<TodoApp />, document.getElementById("root"));
 
