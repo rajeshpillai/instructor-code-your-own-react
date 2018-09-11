@@ -59,7 +59,10 @@ class TodoApp extends TinyReact.Component {
           index={index}
           onDelete={this.deleteTodo}
           onEditTask={this.onEditTask}
-        />
+        >
+          <Header title = {task} />
+          <TodoFooter></TodoFooter>
+        </Todo>
       );
     });
     console.log("tasks", tasks);
@@ -70,6 +73,14 @@ class TodoApp extends TinyReact.Component {
         <input type="button" onClick={this.addToDo} value="Add Todo" />
       </div>
     );
+  }
+}
+
+class TodoFooter extends TinyReact.Component {
+  render () {
+    return (
+      <div>copyright &copy; 2018 free</div>
+    )
   }
 }
 
@@ -123,6 +134,7 @@ class Todo extends TinyReact.Component {
           Edit
         </a>
         {textBoxView()}
+        {this.props.children}
       </div>
     );
   }
