@@ -277,7 +277,7 @@ class Todo extends TinyReact.Component {
     return (
       <div>
         {this.props.task}
-        <a href="#" onClick={() => this.props.onDelete(this.state.task)}>
+        <a href="#" onClick={() => this.props.onDelete(this.props.task)}>
           X
         </a>{" "}
         <a href="#" onClick={() => this.toggleEditableForm()}>
