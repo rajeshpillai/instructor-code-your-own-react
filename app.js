@@ -1,4 +1,7 @@
 /** @jsx TinyReact.createElement */
+
+const root = document.getElementById("root");
+
 class TodoApp extends TinyReact.Component {
   constructor(props) {
     super(props);
@@ -134,7 +137,7 @@ const nestedElement = (
 );
 
 console.log("Nested: ", nestedElement);
-TinyReact.render(nestedElement, document.getElementById("root"));
+console.log("render: ", TinyReact.render(nestedElement, root));
 
 //TinyReact.render(<TodoApp />, document.getElementById("root"));
 
