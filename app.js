@@ -9,20 +9,20 @@ class TodoApp extends TinyReact.Component {
     this.deleteTodo = this.deleteTodo.bind(this);
     this.state = {
       header: "Test",
-      tasks: props.tasks || ["Task 1", "Task 2"]
+      tasks: props.tasks || []
     };
     this.count = 1;
   }
 
   addToDo() {
-    alert("Adding todo...");
+    //alert("Adding todo...");
     this.count += 1;
     this.setState({
       header: "Header " + this.count,
       tasks: [...this.state.tasks, "New Title " + this.count]
     });
 
-    render(this.state.tasks); // Call global render, to force render
+    //render(this.state.tasks); // Call global render, to force render
   }
 
   deleteTodo(task) {
@@ -58,19 +58,18 @@ class TodoApp extends TinyReact.Component {
           task={task}
           index={index}
           onDelete={this.deleteTodo}
-          onEditTask={this.onEditTask}
-        >
-          <Header title = {task} />
-          <TodoFooter></TodoFooter>
+          onEditTask={this.onEditTask}>
         </Todo>
       );
     });
     console.log("tasks", tasks);
     return (
       <div>
-        <Header userName={this.state.header} />
-        <div>{tasks}</div>
+        {/* <Header title={this.state.header} /> */}
         <input type="button" onClick={this.addToDo} value="Add Todo" />
+        <div>{tasks}</div>
+        {/* <TodoFooter></TodoFooter> */}
+
       </div>
     );
   }
@@ -142,11 +141,11 @@ class Todo extends TinyReact.Component {
 
 //console.log("Component: ",<TodoApp />);
 
-const simpleElement = <div className="app">Div 1</div>;
-console.log("simple:render: ", TinyReact.render(simpleElement, root));
+//const simpleElement = <div className="app">Div 1</div>;
+//console.log("simple:render: ", TinyReact.render(simpleElement, root));
 
 function onClick (e) {
-  alert(e.target.innerText);
+  //alert(e.target.innerText);
 }
 
 const nestedElement = (
@@ -158,7 +157,7 @@ const nestedElement = (
 );
 
 //console.log("Nested: ", nestedElement);
-console.log("nested:render: ", TinyReact.render(nestedElement, root));
+//console.log("nested:render: ", TinyReact.render(nestedElement, root));
 
 // Adding functional component
 const Header = function (props) {
@@ -168,15 +167,15 @@ const Header = function (props) {
   )
 }
 
-console.log("function:vdom: ", Header);
-console.log("function:render: ", TinyReact.render(<Header title="Header 1" />, root));
+//console.log("function:vdom: ", Header);
+//console.log("function:render: ", TinyReact.render(<Header title="Header 1" />, root));
 
 console.log("component:vdom: ", TodoApp);
 console.log("component:render: ", TinyReact.render(<TodoApp />, root));
 
 function render(tasks) {
   alert(JSON.stringify(tasks));
-  TinyReact.render(<TodoApp tasks={tasks} />, root);
+  //TinyReact.render(<TodoApp tasks={tasks} />, root);
 }
 
 //TinyReact.render(<TodoApp />, document.getElementById("root"));
