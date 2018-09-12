@@ -9,7 +9,8 @@ class TodoApp extends TinyReact.Component {
     this.deleteTodo = this.deleteTodo.bind(this);
     this.state = {
       header: "Test",
-      tasks: props.tasks || []
+      tasks: props.tasks || [],
+      sortOrder: "asc",
     };
     this.count = 1;
   }
@@ -50,6 +51,26 @@ class TodoApp extends TinyReact.Component {
     });
   };
 
+  sortToDo=()=> {
+    let tasks =  null;
+    let sortOrder = this.state.sortOrder;
+    if (!sortOrder) {
+      tasks = this.state.tasks.sort((a, b) => +(a > b) || -(a < b));
+      sortOrder = "asc";
+    } else if (sortOrder === "asc") {
+      sortOrder = "desc";
+      tasks = this.state.tasks.sort((a, b) => +(b > a) || -(b < a));
+    } else  {
+      sortOrder = "asc";
+      tasks = this.state.tasks.sort((a, b) => +(a > b) || -(a < b));
+    }
+    console.log("Sorted Tasks: ", tasks);
+    this.setState({
+      tasks,
+      sortOrder
+    });
+  }
+
   render() {
     let tasks = this.state.tasks.map((task, index) => {
       //   return <div>{task}</div>;
@@ -67,6 +88,7 @@ class TodoApp extends TinyReact.Component {
       <div>
         {/* <Header title={this.state.header} /> */}
         <input type="button" onClick={this.addToDo} value="Add Todo" />
+        <input type="button" onClick={this.sortToDo} value="Sort" />
         <div>{tasks}</div>
         {/* <TodoFooter></TodoFooter> */}
 
