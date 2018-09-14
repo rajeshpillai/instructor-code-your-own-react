@@ -76,7 +76,7 @@ class TodoApp extends TinyReact.Component {
       //   return <div>{task}</div>;
       return (
         <Todo
-          key={task}
+          key={index}
           task={task}
           index={index}
           onDelete={this.deleteTodo}
@@ -87,7 +87,7 @@ class TodoApp extends TinyReact.Component {
     console.log("tasks", tasks);
     return (
       <div>
-        <Header title={this.state.header} />
+        {/* <Header title={this.state.header} /> */}
         <input type="button" onClick={this.addToDo} value="Add Todo" />
         <input type="button" onClick={this.sortToDo} value="Sort" />
         <div>{tasks}</div>
