@@ -20,7 +20,7 @@ class TodoApp extends TinyReact.Component {
     this.count += 1;
     this.setState({
       header: "Header " + this.count,
-      tasks: [...this.state.tasks, "New Title " + this.count]
+      tasks: [...this.state.tasks, {id: +new Date(), title:"New Title " + this.count}]
     });
 
     //render(this.state.tasks); // Call global render, to force render
@@ -29,7 +29,7 @@ class TodoApp extends TinyReact.Component {
   deleteTodo(task) {
     console.log(task);
     var tasks = this.state.tasks.filter(t => {
-      return t != task;
+      return t.id != task.id;
     });
 
     this.setState({
@@ -40,7 +40,7 @@ class TodoApp extends TinyReact.Component {
   onEditTask = (task, index) => {
     console.log("task", task, index);
     var tasks = this.state.tasks.map((t, i) => {
-      if (i == index) {
+      if (t.id == task.id) {
         t = task;
       }
       return t;
@@ -55,14 +55,14 @@ class TodoApp extends TinyReact.Component {
     let tasks =  null;
     let sortOrder = this.state.sortOrder;
     if (!sortOrder) {
-      tasks = this.state.tasks.sort((a, b) => +(a > b) || -(a < b));
+      tasks = this.state.tasks.sort((a, b) => +(a.title > b.title) || -(a.title < b.title));
       sortOrder = "asc";
     } else if (sortOrder === "asc") {
       sortOrder = "desc";
-      tasks = this.state.tasks.sort((a, b) => +(b > a) || -(b < a));
+      tasks = this.state.tasks.sort((a, b) => +(b.title > a.title) || -(b.title < a.title));
     } else  {
       sortOrder = "asc";
-      tasks = this.state.tasks.sort((a, b) => +(a > b) || -(a < b));
+      tasks = this.state.tasks.sort((a, b) => +(a.title > b.title) || -(a.title < b.title));
     }
     console.log("Sorted Tasks: ", tasks);
     this.setState({
@@ -76,7 +76,7 @@ class TodoApp extends TinyReact.Component {
       //   return <div>{task}</div>;
       return (
         <Todo
-          key={index}
+          key={task.id}
           task={task}
           index={index}
           onDelete={this.deleteTodo}
@@ -124,7 +124,11 @@ class Todo extends TinyReact.Component {
   saveTask(e) {
     console.log("save Task");
     this.toggleEditableForm();
-    this.props.onEditTask(this.input.value, this.state.index);
+    let task = {
+      id: this.props.task.id,
+      title: this.input.value
+    }
+    this.props.onEditTask(task, this.state.index);
   }
 
 
@@ -135,7 +139,7 @@ class Todo extends TinyReact.Component {
           <span>
             <input
               type="text"
-              value={this.props.task}
+              value={this.props.task.title}
               ref={input => (this.input = input)}
               //   onChange={e => this.onChangeTask(e)}
             />
@@ -148,7 +152,7 @@ class Todo extends TinyReact.Component {
 
     return (
       <div>
-        {this.props.task}
+        {this.props.task && this.props.task.title}
         <a href="#" onClick={() => this.props.onDelete(this.props.task)}>
           X
         </a>{" "}
