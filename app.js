@@ -8,18 +8,18 @@ class TodoApp extends TinyReact.Component {
     this.addToDo = this.addToDo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
     this.state = {
-      header: "Test",
+      header: "# Todos: 0",
       tasks: props.tasks || [],
       sortOrder: "asc",
     };
-    this.count = 1;
+    this.count = 0;
   }
 
   addToDo() {
     //alert("Adding todo...");
     this.count += 1;
     this.setState({
-      header: "Header " + this.count,
+      header: "# Todos: " + this.count,
       tasks: [...this.state.tasks, {id: +new Date(), title:"New Title " + this.count}]
     });
 
@@ -33,6 +33,7 @@ class TodoApp extends TinyReact.Component {
     });
 
     this.setState({
+      header: "# Todos: " + tasks.length,
       tasks
     });
   }
@@ -87,11 +88,11 @@ class TodoApp extends TinyReact.Component {
     console.log("tasks", tasks);
     return (
       <div>
-        {/* <Header title={this.state.header} /> */}
+        <Header title={this.state.header} />
         <input type="button" onClick={this.addToDo} value="Add Todo" />
         <input type="button" onClick={this.sortToDo} value="Sort" />
         <div>{tasks}</div>
-        {/* <TodoFooter></TodoFooter> */}
+        <TodoFooter></TodoFooter>
 
       </div>
     );
