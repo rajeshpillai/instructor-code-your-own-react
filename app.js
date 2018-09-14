@@ -7,6 +7,7 @@ class TodoApp extends TinyReact.Component {
     super(props);
     this.addToDo = this.addToDo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
+    this.onEditTask = this.onEditTask.bind(this);
     this.state = {
       header: "# Todos: 0",
       tasks: props.tasks || [],
@@ -88,11 +89,11 @@ class TodoApp extends TinyReact.Component {
     console.log("tasks", tasks);
     return (
       <div>
-        <Header title={this.state.header} />
+        {/* <Header title={this.state.header} /> */}
         <input type="button" onClick={this.addToDo} value="Add Todo" />
         <input type="button" onClick={this.sortToDo} value="Sort" />
         <div>{tasks}</div>
-        <TodoFooter></TodoFooter>
+        {/* <TodoFooter></TodoFooter> */}
 
       </div>
     );
@@ -110,6 +111,8 @@ class TodoFooter extends TinyReact.Component {
 class Todo extends TinyReact.Component {
   constructor(props) {
     super(props);
+    this.toggleEditableForm = this.toggleEditableForm.bind(this);
+    this.saveTask = this.saveTask.bind(this);
     this.state = {
       editable: false,
       index: props.index
