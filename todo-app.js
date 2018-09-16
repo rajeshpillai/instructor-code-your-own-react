@@ -94,9 +94,14 @@ class TodoApp extends TinyReact.Component {
 
 
   addTodo() {
+    let newTodo = {
+      id: +new Date(),
+      title: this.newTodo.value,
+      edit: false
+    }
     this.setState({
       tasks: [...this.state.tasks,
-              {id: +new Date(), title:"New Title " + this.state.tasks.length}]
+              newTodo]
     });
    
   }
@@ -154,7 +159,7 @@ class TodoApp extends TinyReact.Component {
     let tasksUI = this.state.tasks.map((task, index) => {
       return (
         <TodoItem
-          key={task.id}
+          keyxxx={task.id}
           task={task}
           index={index}
           onDelete={this.deleteTodo}
@@ -167,6 +172,7 @@ class TodoApp extends TinyReact.Component {
     return (
       <div>
          {/* {Header} */}
+         <input type="text" ref={(newTodo)=>this.newTodo = newTodo} placeholder="what do you want to do today?"/>
         <input type="button" onClick={this.addTodo} value="Add Todo" />
         <input type="button" onClick={this.sortToDo} value="Sort" />
         <ul>
