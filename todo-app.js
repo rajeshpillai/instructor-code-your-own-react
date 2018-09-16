@@ -7,7 +7,9 @@ let Header = (
 
 const TodoItem = function (props) {
   return (
-    <li className="todo-item">{props.task.title}</li>
+    <li className="todo-item">{props.task.title}
+      <input type="button" onClick={() => this.props.onDelete(this.props.task)} value="x" />
+    </li>
   );
 }
 
@@ -15,10 +17,24 @@ class TodoApp extends TinyReact.Component {
   constructor(props) {
     super(props); 
     this.addTodo = this.addTodo.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this);
     this.state = {
       tasks: [{id: 1, title: "Task 1"}],
     };
   }
+
+  deleteTodo(task) {
+    alert(task);
+    var tasks = this.state.tasks.filter(t => {
+      return t.id != task.id;
+    });
+
+    this.setState({
+      header: "# Todos: " + tasks.length,
+      tasks
+    });
+  }
+
 
   addTodo() {
     this.setState({
@@ -42,7 +58,7 @@ class TodoApp extends TinyReact.Component {
     
     return (
       <div>
-         {Header}
+         {/* {Header} */}
         <input type="button" onClick={this.addTodo} value="Add Todo" />
         <ul>
          {tasksUI}
