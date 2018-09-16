@@ -6,9 +6,30 @@ let Header = (
 );
 
 const TodoItem = function (props) {
+  var textInput = null;
+  function handleEdit(task) {
+    props.onUpdateTask(props.task.id, textInput.value);
+  }
+  const editView = (props) => {
+    if (props.task.edit) {
+      return (
+        <span>
+          <input
+            type="text"
+            value={props.task.title}
+            ref={input => textInput = input}
+          />
+          <input type="button" value="Save" onClick={() => handleEdit(props.task)} />
+        </span>
+      );
+    }
+    return props.task.title;
+  };
+
   return (
-    <li className="todo-item">{props.task.title}
+    <li className="todo-item">{editView(props)}
       <input type="button" onClick={() => this.props.onDelete(this.props.task)} value="x" />
+      <input type="button" onClick={() => this.props.onToggleEdit(this.props.task)} value="e" />
     </li>
   );
 }
@@ -18,13 +39,14 @@ class TodoApp extends TinyReact.Component {
     super(props); 
     this.addTodo = this.addTodo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
+    this.onToggleEdit = this.onToggleEdit.bind(this);
+    this.onUpdateTask = this.onUpdateTask.bind(this);
     this.state = {
-      tasks: [{id: 1, title: "Task 1"}],
+      tasks: [{id: 1, title: "Task 1", edit: false}],
     };
   }
 
   deleteTodo(task) {
-    alert(task);
     var tasks = this.state.tasks.filter(t => {
       return t.id != task.id;
     });
@@ -43,6 +65,35 @@ class TodoApp extends TinyReact.Component {
     });
    
   }
+
+  onUpdateTask(taskId, newTitle) {
+    alert(newTitle);
+    var tasks = this.state.tasks.map(t => {
+      if (t.id === taskId) {
+        t.title = newTitle;
+        t.edit = !t.edit;
+      }
+      return t;
+     });
+    
+     this.setState({
+       tasks
+     });
+  }
+
+  onToggleEdit(task) {
+    var tasks = this.state.tasks.map(t => {
+     if (t.id === task.id) {
+       t.edit = !t.edit;
+     }
+     return t;
+    });
+   
+    this.setState({
+      tasks
+    });
+  }
+
   render() {
     let tasksUI = this.state.tasks.map((task, index) => {
       return (
@@ -51,7 +102,8 @@ class TodoApp extends TinyReact.Component {
           task={task}
           index={index}
           onDelete={this.deleteTodo}
-          onEditTask={this.onEditTask}>
+          onToggleEdit={this.onToggleEdit}
+          onUpdateTask={this.onUpdateTask}>
         </TodoItem>
       );
     });
