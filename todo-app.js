@@ -5,33 +5,67 @@ let Header = (
   <h2>Todo App</h2>
 );
 
-const TodoItem = function (props) {
-  var textInput = null;
-  function handleEdit(task) {
-    props.onUpdateTask(props.task.id, textInput.value);
+// const TodoItem = function (props) {
+//   let textInput = null;
+//   function handleEdit(task) {
+//     props.onUpdateTask(props.task.id, textInput.value);
+//   }
+//   const editView = (props) => {
+//     if (props.task.edit) {
+//       return (
+//         <span>
+//           <input
+//             type="text"
+//             value={props.task.title}
+//             ref={input => textInput = input}
+//           />
+//           <input type="button" value="Save" onClick={() => handleEdit(props.task)} />
+//         </span>
+//       );
+//     }
+//     return props.task.title;
+//   };
+
+//   return (
+//     <li className="todo-item">{editView(props)}
+//       <input type="button" onClick={() => this.props.onDelete(this.props.task)} value="x" />
+//       <input type="button" onClick={() => this.props.onToggleEdit(this.props.task)} value="e" />
+//     </li>
+//   );
+// }
+
+class TodoItem extends TinyReact.Component{
+  constructor(props) {
+    super(props);
   }
-  const editView = (props) => {
+  handleEdit =(task)=> {
+    this.props.onUpdateTask(task.id, this.textInput.value);
+  }
+  
+  editView = (props) => {
     if (props.task.edit) {
       return (
         <span>
           <input
             type="text"
             value={props.task.title}
-            ref={input => textInput = input}
+            ref={input => this.textInput = input}
           />
-          <input type="button" value="Save" onClick={() => handleEdit(props.task)} />
+          <input type="button" value="Save" onClick={() => this.handleEdit(this.props.task)} />
         </span>
       );
     }
     return props.task.title;
   };
 
-  return (
-    <li className="todo-item">{editView(props)}
-      <input type="button" onClick={() => this.props.onDelete(this.props.task)} value="x" />
-      <input type="button" onClick={() => this.props.onToggleEdit(this.props.task)} value="e" />
-    </li>
-  );
+  render() {
+    return (
+      <li className="todo-item">{this.editView(this.props)}
+        <input type="button" onClick={() => this.props.onDelete(this.props.task)} value="x" />
+        <input type="button" onClick={() => this.props.onToggleEdit(this.props.task)} value="e" />
+      </li>
+    );
+  }
 }
 
 class TodoApp extends TinyReact.Component {
@@ -67,7 +101,7 @@ class TodoApp extends TinyReact.Component {
   }
 
   onUpdateTask(taskId, newTitle) {
-    alert(newTitle);
+    //alert(newTitle);
     var tasks = this.state.tasks.map(t => {
       if (t.id === taskId) {
         t.title = newTitle;
@@ -85,6 +119,8 @@ class TodoApp extends TinyReact.Component {
     var tasks = this.state.tasks.map(t => {
      if (t.id === task.id) {
        t.edit = !t.edit;
+     } else {
+       t.edit = false; // Force, due to bug in ref.
      }
      return t;
     });
