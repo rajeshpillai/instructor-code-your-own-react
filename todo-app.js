@@ -77,6 +77,7 @@ class TodoApp extends TinyReact.Component {
     this.onUpdateTask = this.onUpdateTask.bind(this);
     this.state = {
       tasks: [{id: 1, title: "Task 1", edit: false}],
+      sortOrder: "asc",
     };
   }
 
@@ -98,6 +99,25 @@ class TodoApp extends TinyReact.Component {
               {id: +new Date(), title:"New Title " + this.state.tasks.length}]
     });
    
+  }
+
+  sortToDo=()=> {
+    let tasks =  null;
+    let sortOrder = this.state.sortOrder;
+    if (!sortOrder) {
+      tasks = this.state.tasks.sort((a, b) => +(a.title > b.title) || -(a.title < b.title));
+      sortOrder = "asc";
+    } else if (sortOrder === "asc") {
+      sortOrder = "desc";
+      tasks = this.state.tasks.sort((a, b) => +(b.title > a.title) || -(b.title < a.title));
+    } else  {
+      sortOrder = "asc";
+      tasks = this.state.tasks.sort((a, b) => +(a.title > b.title) || -(a.title < b.title));
+    }
+    this.setState({
+      tasks,
+      sortOrder
+    });
   }
 
   onUpdateTask(taskId, newTitle) {
@@ -148,6 +168,7 @@ class TodoApp extends TinyReact.Component {
       <div>
          {/* {Header} */}
         <input type="button" onClick={this.addTodo} value="Add Todo" />
+        <input type="button" onClick={this.sortToDo} value="Sort" />
         <ul>
          {tasksUI}
         </ul>
