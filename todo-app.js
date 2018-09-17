@@ -38,6 +38,16 @@ class TodoItem extends TinyReact.Component{
   constructor(props) {
     super(props);
   }
+  componentDidMount(){
+    console.log("2. TodoItem:cdm");
+  }
+  componentWillMount(){
+    console.log("1. TodoItem:cwu");
+  }
+  componentWillUnmount(){
+      console.log("TodoItem:cwu");
+  }
+
   handleEdit =(task)=> {
     this.props.onUpdateTask(task.id, this.textInput.value);
   }
