@@ -36,7 +36,7 @@ let Header = (props) => <h2>{props.text}</h2>;
 class TodoItem extends TinyReact.Component{
   constructor(props) {
     super(props);
-    this.logging = false;
+    this.logging = true;
   }
 
   log(msg) {
@@ -54,7 +54,7 @@ class TodoItem extends TinyReact.Component{
     this.log("TodoItem:cwrp: ", nextProps);
   }
   componentWillUnmount(){
-      this.log("TodoItem:cwu");
+      this.log("TodoItem:cwu: " + this.props.task.title);
   }
 
   handleEdit =(task)=> {
@@ -78,10 +78,16 @@ class TodoItem extends TinyReact.Component{
   };
 
   render() {
+    let className = "todo-item ";
+    if (this.props.task.completed) {
+        className += "todo-item-completed";
+    }
     return (
-      <li className="todo-item">{this.editView(this.props)}
-        <input type="button" onClick={() => this.props.onDelete(this.props.task)} value="x" />
-        <input type="button" onClick={() => this.props.onToggleEdit(this.props.task)} value="e" />
+      <li className={className} onDblClick={() => this.props.onToggleComplete(this.props.task)}>{this.editView(this.props)}
+        <div className="todo-actions">
+          <input type="button" onClick={() => this.props.onDelete(this.props.task)} value="x" />
+          <input type="button" onClick={() => this.props.onToggleEdit(this.props.task)} value="e" />
+        </div>
       </li>
     );
   }
@@ -94,6 +100,7 @@ class TodoApp extends TinyReact.Component {
     this.deleteTodo = this.deleteTodo.bind(this);
     this.onToggleEdit = this.onToggleEdit.bind(this);
     this.onUpdateTask = this.onUpdateTask.bind(this);
+    this.onToggleComplete = this.onToggleComplete.bind(this);
     this.state = {
       tasks: [{id: 1, title: "Task 1", edit: false}],
       sortOrder: "asc",
@@ -174,6 +181,19 @@ class TodoApp extends TinyReact.Component {
     });
   }
 
+  onToggleComplete(task) {
+    var tasks = this.state.tasks.map(t => {
+        if (t.id === task.id) {
+        t.completed = !t.completed;
+        }
+        return t;
+    });
+   
+    this.setState({
+      tasks
+    });
+  }
+
   render() {
     let tasksUI = this.state.tasks.map((task, index) => {
       return (
@@ -183,6 +203,8 @@ class TodoApp extends TinyReact.Component {
           index={index}
           onDelete={this.deleteTodo}
           onToggleEdit={this.onToggleEdit}
+          onToggleComplete={this.onToggleComplete}
+          
           onUpdateTask={this.onUpdateTask}>
         </TodoItem>
       );
@@ -194,7 +216,7 @@ class TodoApp extends TinyReact.Component {
          <input type="text" ref={(newTodo)=>this.newTodo = newTodo} placeholder="what do you want to do today?"/>
         <input type="button" onClick={this.addTodo} value="Add Todo" />
         <input type="button" onClick={this.sortToDo} value="Sort" />
-        <ul>
+        <ul className="todos">
          {tasksUI}
         </ul>
       </div>
