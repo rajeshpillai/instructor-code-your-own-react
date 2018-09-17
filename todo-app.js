@@ -44,6 +44,9 @@ class TodoItem extends TinyReact.Component{
   componentWillMount(){
     console.log("1. TodoItem:cwu");
   }
+  componentWillReceiveProps(nextProps) {
+    console.log("TodoItem:cwrp: ", nextProps);
+  }
   componentWillUnmount(){
       console.log("TodoItem:cwu");
   }
