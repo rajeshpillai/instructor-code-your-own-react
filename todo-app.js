@@ -213,7 +213,7 @@ class TodoApp extends TinyReact.Component {
     let tasksUI = this.state.tasks.map((task, index) => {
       return (
         <TodoItem
-          keyxxx={task.id}
+          key={task.id}
           task={task}
           index={index}
           onDelete={this.deleteTodo}
