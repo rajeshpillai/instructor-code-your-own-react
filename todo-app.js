@@ -203,4 +203,45 @@ class TodoApp extends TinyReact.Component {
   }
 }
 
+class MessageContainer extends TinyReact.Component {
+    render () {
+        return <Message />
+    }
+}
+
+class Message extends TinyReact.Component {
+    render () {
+        return (
+           <Message2>
+               Hello from Message!
+           </Message2>
+        );
+    }
+}
+
+class Message2 extends TinyReact.Component {
+    render () {
+        return (
+             <div>
+                <p>
+                    <span>{this.props.children}</span>
+                </p>
+                <Message3></Message3>
+                <button>Click me</button>
+            </div>
+        );
+    }
+}
+class Message3 extends TinyReact.Component {
+    render () {
+        return (
+             <div>
+               Here is message 3!
+            </div>
+        );
+    }
+}
+
+
 TinyReact.render(<TodoApp />, root);
+//TinyReact.render(<MessageContainer />, root);
