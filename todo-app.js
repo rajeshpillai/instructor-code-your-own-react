@@ -37,18 +37,25 @@ let Header = (
 class TodoItem extends TinyReact.Component{
   constructor(props) {
     super(props);
+    this.logging = false;
+  }
+
+  log(msg) {
+      if (this.logging) {
+          console.log(msg);
+      }
   }
   componentDidMount(){
-    console.log("2. TodoItem:cdm");
+    this.log("2. TodoItem:cdm");
   }
   componentWillMount(){
-    console.log("1. TodoItem:cwu");
+    this.log("1. TodoItem:cwu");
   }
   componentWillReceiveProps(nextProps) {
-    console.log("TodoItem:cwrp: ", nextProps);
+    this.log("TodoItem:cwrp: ", nextProps);
   }
   componentWillUnmount(){
-      console.log("TodoItem:cwu");
+      this.log("TodoItem:cwu");
   }
 
   handleEdit =(task)=> {
@@ -184,7 +191,7 @@ class TodoApp extends TinyReact.Component {
     
     return (
       <div>
-         {/* {Header} */}
+         {Header}
          <input type="text" ref={(newTodo)=>this.newTodo = newTodo} placeholder="what do you want to do today?"/>
         <input type="button" onClick={this.addTodo} value="Add Todo" />
         <input type="button" onClick={this.sortToDo} value="Sort" />
