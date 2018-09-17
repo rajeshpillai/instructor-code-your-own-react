@@ -1,8 +1,14 @@
 /**** Demo *****/
 /** @jsx TinyReact.createElement */
 const root = document.getElementById("root");
-let Header = (props) => <h2>{props.text}</h2>;
-
+let Header = (props) => {
+  return (
+    <div>
+      <h2>{props.text}</h2>
+      <h6>(double click on todo to mark as completed)</h6>
+    </div>  
+  );
+}
 
 // const TodoItem = function (props) {
 //   let textInput = null;
