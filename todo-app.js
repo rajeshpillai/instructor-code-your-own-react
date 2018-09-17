@@ -164,7 +164,7 @@ class TodoApp extends TinyReact.Component {
      if (t.id === task.id) {
        t.edit = !t.edit;
      } else {
-       t.edit = false; // Force, due to bug in ref.
+       //t.edit = false; // Force, due to bug in ref.
      }
      return t;
     });
