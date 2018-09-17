@@ -33,34 +33,34 @@ let Header = (props) => <h2>{props.text}</h2>;
 //   );
 // }
 
-class TodoItem extends TinyReact.Component{
+class TodoItem extends TinyReact.Component {
   constructor(props) {
     super(props);
     this.logging = true;
   }
 
   log(msg) {
-      if (this.logging) {
-          console.log(msg);
-      }
+    if (this.logging) {
+      console.log(msg);
+    }
   }
-  componentDidMount(){
+  componentDidMount() {
     this.log("2. TodoItem:cdm");
   }
-  componentWillMount(){
+  componentWillMount() {
     this.log("1. TodoItem:cwu");
   }
   componentWillReceiveProps(nextProps) {
     this.log("TodoItem:cwrp: ", nextProps);
   }
-  componentWillUnmount(){
-      this.log("TodoItem:cwu: " + this.props.task.title);
+  componentWillUnmount() {
+    this.log("TodoItem:cwu: " + this.props.task.title);
   }
 
-  handleEdit =(task)=> {
+  handleEdit = (task) => {
     this.props.onUpdateTask(task.id, this.textInput.value);
   }
-  
+
   editView = (props) => {
     if (props.task.edit) {
       return (
@@ -80,7 +80,7 @@ class TodoItem extends TinyReact.Component{
   render() {
     let className = "todo-item ";
     if (this.props.task.completed) {
-        className += "todo-item-completed";
+      className += "todo-item-completed";
     }
     return (
       <li className={className} onDblClick={() => this.props.onToggleComplete(this.props.task)}>{this.editView(this.props)}
@@ -95,18 +95,25 @@ class TodoItem extends TinyReact.Component{
 
 class TodoApp extends TinyReact.Component {
   constructor(props) {
-    super(props); 
+    super(props);
     this.addTodo = this.addTodo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
     this.onToggleEdit = this.onToggleEdit.bind(this);
     this.onUpdateTask = this.onUpdateTask.bind(this);
     this.onToggleComplete = this.onToggleComplete.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
+
     this.state = {
-      tasks: [{id: 1, title: "Task 1", edit: false}],
+      tasks: [{ id: 1, title: "Task 1", edit: false }],
       sortOrder: "asc",
     };
   }
 
+  onKeyDown(e) {
+    if (e.which === 13) {
+      this.addTodo();
+    }
+  }
   deleteTodo(task) {
     var tasks = this.state.tasks.filter(t => {
       return t.id != task.id;
@@ -127,13 +134,15 @@ class TodoApp extends TinyReact.Component {
     }
     this.setState({
       tasks: [...this.state.tasks,
-              newTodo]
+        newTodo]
     });
-   
+
+    this.newTodo.value = "";
+    this.newTodo.focus();
   }
 
-  sortToDo=()=> {
-    let tasks =  null;
+  sortToDo = () => {
+    let tasks = null;
     let sortOrder = this.state.sortOrder;
     if (!sortOrder) {
       tasks = this.state.tasks.sort((a, b) => +(a.title > b.title) || -(a.title < b.title));
@@ -141,7 +150,7 @@ class TodoApp extends TinyReact.Component {
     } else if (sortOrder === "asc") {
       sortOrder = "desc";
       tasks = this.state.tasks.sort((a, b) => +(b.title > a.title) || -(b.title < a.title));
-    } else  {
+    } else {
       sortOrder = "asc";
       tasks = this.state.tasks.sort((a, b) => +(a.title > b.title) || -(a.title < b.title));
     }
@@ -159,23 +168,23 @@ class TodoApp extends TinyReact.Component {
         t.edit = !t.edit;
       }
       return t;
-     });
-    
-     this.setState({
-       tasks
-     });
+    });
+
+    this.setState({
+      tasks
+    });
   }
 
   onToggleEdit(task) {
     var tasks = this.state.tasks.map(t => {
-     if (t.id === task.id) {
-       t.edit = !t.edit;
-     } else {
-       //t.edit = false; // Force, due to bug in ref.
-     }
-     return t;
+      if (t.id === task.id) {
+        t.edit = !t.edit;
+      } else {
+        //t.edit = false; // Force, due to bug in ref.
+      }
+      return t;
     });
-   
+
     this.setState({
       tasks
     });
@@ -183,12 +192,12 @@ class TodoApp extends TinyReact.Component {
 
   onToggleComplete(task) {
     var tasks = this.state.tasks.map(t => {
-        if (t.id === task.id) {
+      if (t.id === task.id) {
         t.completed = !t.completed;
-        }
-        return t;
+      }
+      return t;
     });
-   
+
     this.setState({
       tasks
     });
@@ -204,20 +213,22 @@ class TodoApp extends TinyReact.Component {
           onDelete={this.deleteTodo}
           onToggleEdit={this.onToggleEdit}
           onToggleComplete={this.onToggleComplete}
-          
+
           onUpdateTask={this.onUpdateTask}>
         </TodoItem>
       );
     });
-    
+
     return (
       <div>
-         <Header text="Todo App"/>
-         <input type="text" ref={(newTodo)=>this.newTodo = newTodo} placeholder="what do you want to do today?"/>
+        <Header text="Todo App" />
+        <input type="text" 
+          onKeyDown={this.onKeyDown}
+          ref={(newTodo) => this.newTodo = newTodo} placeholder="what do you want to do today?" />
         <input type="button" onClick={this.addTodo} value="Add Todo" />
         <input type="button" onClick={this.sortToDo} value="Sort" />
         <ul className="todos">
-         {tasksUI}
+          {tasksUI}
         </ul>
       </div>
     );
@@ -225,42 +236,42 @@ class TodoApp extends TinyReact.Component {
 }
 
 class MessageContainer extends TinyReact.Component {
-    render () {
-        return <Message />
-    }
+  render() {
+    return <Message />
+  }
 }
 
 class Message extends TinyReact.Component {
-    render () {
-        return (
-           <Message2>
-               Hello from Message!
+  render() {
+    return (
+      <Message2>
+        Hello from Message!
            </Message2>
-        );
-    }
+    );
+  }
 }
 
 class Message2 extends TinyReact.Component {
-    render () {
-        return (
-             <div>
-                <p>
-                    <span>{this.props.children}</span>
-                </p>
-                <Message3></Message3>
-                <button>Click me</button>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <p>
+          <span>{this.props.children}</span>
+        </p>
+        <Message3></Message3>
+        <button>Click me</button>
+      </div>
+    );
+  }
 }
 class Message3 extends TinyReact.Component {
-    render () {
-        return (
-             <div>
-               Here is message 3!
+  render() {
+    return (
+      <div>
+        Here is message 3!
             </div>
-        );
-    }
+    );
+  }
 }
 
 
