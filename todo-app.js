@@ -1,9 +1,8 @@
 /**** Demo *****/
 /** @jsx TinyReact.createElement */
 const root = document.getElementById("root");
-let Header = (
-  <h2>Todo App</h2>
-);
+let Header = (props) => <h2>{props.text}</h2>;
+
 
 // const TodoItem = function (props) {
 //   let textInput = null;
@@ -191,7 +190,7 @@ class TodoApp extends TinyReact.Component {
     
     return (
       <div>
-         {Header}
+         <Header text="Todo App"/>
          <input type="text" ref={(newTodo)=>this.newTodo = newTodo} placeholder="what do you want to do today?"/>
         <input type="button" onClick={this.addTodo} value="Add Todo" />
         <input type="button" onClick={this.sortToDo} value="Sort" />
