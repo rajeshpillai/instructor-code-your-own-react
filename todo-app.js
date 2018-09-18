@@ -227,7 +227,7 @@ class TodoApp extends TinyReact.Component {
 
     return (
       <div>
-        <Header text="Todo App" />
+        {/* <Header text="Todo App" /> */}
         <input type="text" 
           onKeyDown={this.onKeyDown}
           ref={(newTodo) => this.newTodo = newTodo} placeholder="what do you want to do today?" />
