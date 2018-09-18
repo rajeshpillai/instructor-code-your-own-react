@@ -280,7 +280,7 @@ class Message3 extends TinyReact.Component {
   }
 }
 
-class Root extends TinyReact.Component {
+class Hello extends TinyReact.Component {
   constructor(props){
     super(props);
     this.onAdd = this.onAdd.bind(this);
@@ -332,6 +332,6 @@ class Root extends TinyReact.Component {
   } 
 }
 
-TinyReact.render(<TodoApp />, root);
+TinyReact.render(<Hello />, root);
 //TinyReact.render(<TodoApp />, root);
 //TinyReact.render(<MessageContainer />, root);
