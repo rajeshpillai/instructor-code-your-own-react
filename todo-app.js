@@ -280,6 +280,58 @@ class Message3 extends TinyReact.Component {
   }
 }
 
+class Root extends TinyReact.Component {
+  constructor(props){
+    super(props);
+    this.onAdd = this.onAdd.bind(this);
+    this.onRemove = this.onRemove.bind(this);
+    
+    this.state.items = [
+      "list 1", "list 2"
+    ];
+  }
+  componentDidMount() {
+    document.addEventListener("click", this.onAdd);
+  }
+  componentWillUnmount() {
+    document.removeListener("click", onAdd); 
+  }
+
+  onAdd(){
+    let item = "list " + (+new Date());
+    this.setState({
+      items: [...this.state.items,item]
+    });
+  }
+  
+  onRemove(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    let temp = e.target.textContent;
+    let items = this.state.items.filter((item) => {
+     return item != temp;
+    });
+    this.setState({
+      items
+    })
+  }
+  
+  render() {
+    let lists = this.state.items.map((item) => {
+      return <li>
+        <a 
+          onClick={this.onRemove}
+          href="#">{item}</a>
+      </li>
+    })
+    return (
+      <ol>
+        {lists}
+      </ol>
+    );
+  } 
+}
 
 TinyReact.render(<TodoApp />, root);
+//TinyReact.render(<TodoApp />, root);
 //TinyReact.render(<MessageContainer />, root);
