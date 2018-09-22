@@ -181,6 +181,7 @@ class TodoApp extends TinyReact.Component {
     });
   }
 
+  // Uses setstate with fn argument
   onToggleEdit(task) {
     var tasks = this.state.tasks.map(t => {
       if (t.id === task.id) {
@@ -191,9 +192,12 @@ class TodoApp extends TinyReact.Component {
       return t;
     });
 
-    this.setState({
+    // this.setState({
+    //   tasks
+    // });
+    this.setState((state, props) => ({
       tasks
-    });
+    }));
   }
 
   onToggleComplete(task) {
