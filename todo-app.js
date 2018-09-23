@@ -337,5 +337,8 @@ class Hello extends TinyReact.Component {
 }
 
 // TinyReact.render(<Hello />, root);
-TinyReact.render(<TodoApp />, root);
+//TinyReact.render(<TodoApp />, root);
+
 //TinyReact.render(<MessageContainer />, root);
+
+TinyReact.render(<TodoApp />, root);
