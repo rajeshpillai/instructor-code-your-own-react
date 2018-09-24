@@ -1,0 +1,3 @@
+**
+*  Different Type -> Unmount old component
+*  Add default index as key to nonkeyed elements
