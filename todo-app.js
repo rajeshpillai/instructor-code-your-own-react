@@ -89,7 +89,7 @@ class TodoItem extends TinyReact.Component {
       className += "todo-item-completed";
     }
     return (
-      <li className={className} onDblClick={() => this.props.onToggleComplete(this.props.task)}>{this.editView(this.props)}
+      <li key={this.props.key} className={className} onDblClick={() => this.props.onToggleComplete(this.props.task)}>{this.editView(this.props)}
         <div className="todo-actions">
           <input type="button" onClick={() => this.props.onDelete(this.props.task)} value="x" />
           <input type="button" onClick={() => this.props.onToggleEdit(this.props.task)} value="e" />
@@ -217,7 +217,7 @@ class TodoApp extends TinyReact.Component {
     let tasksUI = this.state.tasks.map((task, index) => {
       return (
         <TodoItem
-          keyxxx={task.id}
+          key={task.id}
           task={task}
           index={index}
           onDelete={this.deleteTodo}
