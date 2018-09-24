@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+# editor 
+.vscode
+
 # testing
 /coverage
 
