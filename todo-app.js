@@ -61,7 +61,7 @@ class TodoItem extends TinyReact.Component {
   render() {
     let className = "todo-item ";
     if (this.props.task.completed) {
-      className += "todo-item-completed";
+      className += "strike";
     }
     return (
       <li key={this.props.key} className={className} onDblClick={() => this.props.onToggleComplete(this.props.task)}>{this.editView(this.props)}
