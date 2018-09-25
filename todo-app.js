@@ -4,40 +4,12 @@ const root = document.getElementById("root");
 let Header = (props) => {
   return (
     <div>
-      <h2>{props.text}</h2>
+      <h1>{props.text}</h1>
       <h6>(double click on todo to mark as completed)</h6>
     </div>  
   );
 }
 
-// const TodoItem = function (props) {
-//   let textInput = null;
-//   function handleEdit(task) {
-//     props.onUpdateTask(props.task.id, textInput.value);
-//   }
-//   const editView = (props) => {
-//     if (props.task.edit) {
-//       return (
-//         <span>
-//           <input
-//             type="text"
-//             value={props.task.title}
-//             ref={input => textInput = input}
-//           />
-//           <input type="button" value="Save" onClick={() => handleEdit(props.task)} />
-//         </span>
-//       );
-//     }
-//     return props.task.title;
-//   };
-
-//   return (
-//     <li className="todo-item">{editView(props)}
-//       <input type="button" onClick={() => this.props.onDelete(this.props.task)} value="x" />
-//       <input type="button" onClick={() => this.props.onToggleEdit(this.props.task)} value="e" />
-//     </li>
-//   );
-// }
 
 class TodoItem extends TinyReact.Component {
   constructor(props) {
@@ -76,7 +48,9 @@ class TodoItem extends TinyReact.Component {
             value={props.task.title}
             ref={input => this.textInput = input}
           />
-          <input type="button" value="Save" onClick={() => this.handleEdit(this.props.task)} />
+          <button type="button" onClick={() => this.handleEdit(this.props.task)}>
+          <i class="fas fa-save"></i>
+          </button>
         </span>
       );
     }
@@ -91,8 +65,13 @@ class TodoItem extends TinyReact.Component {
     return (
       <li key={this.props.key} className={className} onDblClick={() => this.props.onToggleComplete(this.props.task)}>{this.editView(this.props)}
         <div className="todo-actions">
-          <input type="button" onClick={() => this.props.onDelete(this.props.task)} value="x" />
-          <input type="button" onClick={() => this.props.onToggleEdit(this.props.task)} value="e" />
+          <button type="button" onClick={() => this.props.onDelete(this.props.task)}>
+            <i class="fas fa-trash"></i>
+          </button>
+          
+          <button type="button" onClick={() => this.props.onToggleEdit(this.props.task)}>
+            <i class="fas fa-edit"></i>
+          </button>
         </div>
       </li>
     );
@@ -229,14 +208,23 @@ class TodoApp extends TinyReact.Component {
       );
     });
 
+    let sortIcon = <i class="fas fa-sort-alpha-down"></i>;
+    if (this.state.sortOrder === "asc") {
+      sortIcon = <i class="fas fa-sort-alpha-up"></i>;
+    } else {
+      sortIcon = <i class="fas fa-sort-alpha-down"></i>;
+    }
+
     return (
-      <div>
+      <div className="container">
         <Header text="Todo App" />
-        <input type="text" 
+        <input type="text" className="addItemInput"
           onKeyDown={this.onKeyDown}
           ref={(newTodo) => this.newTodo = newTodo} placeholder="what do you want to do today?" />
-        <input type="button" onClick={this.addTodo} value="Add Todo" />
-        <input type="button" onClick={this.sortToDo} value="Sort" />
+        <button type="button"  className="addItemButton" onClick={this.addTodo} value="Add Todo">Add Todo</button>
+        <button type="button"  onClick={this.sortToDo} value="Sort">
+          {sortIcon}
+        </button>
         <ul className="todos">
           {tasksUI}
         </ul>

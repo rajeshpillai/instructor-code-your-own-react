@@ -1,7 +1,98 @@
-.todos {
-    background-color: lightgray;
-}
+body {
+    font-size: 1.15rem;
+    background: #edeff0;
+    padding: 0;
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    height: 100vh;
+  }
+  
+  h1 {
+    font-size: 2.1em;
+    margin-top: 5px;
+    margin-bottom: 0;
+    color: #384047;
+    line-height: 1;
+    text-align: center;
+  }
+  
+  .container p {
+    text-align: center;
+  }
+  
+  
+  
+  .desc {
+    color: #222;
+    font-size: 1em;
+    margin-bottom: 15px;
+  }
+  .container {
+    width: 450px;
+    box-sizing: border-box;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+    margin: 40px auto 0;
+  }
+  .todos {
+    padding: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
+  }
 
-.todo-item {
-    padding: 5px;
-}
+  li {
+    list-style-type: disc;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+  }
+
+  .todo-actions {
+      margin-left: auto;
+  }
+  
+  input {
+    margin-right: 7px;
+    caret-color: blue;
+  }
+  .addItemInput {
+    width: 13em;
+    padding: 1px 1px;
+    margin-right: 7px;
+    height: 1.5em;
+    font-size: 90%;
+  }
+  /* Buttons */
+  button {
+    color: white;
+    background: #508abc;
+    border: solid 1px;
+    border-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.75em;
+    padding: 0.5em 0.65em;
+  }
+  button + button {
+    margin-left: 0.5em;
+  }
+  .container button + button {
+    background: #768da3;
+  }
+  .container li button + button {
+    background: #508abc;
+  }
+  .upButton {
+    margin-left: auto;
+    background: #52bab3;
+  }
+  .container li button:last-child {
+    background: #768da3;
+  }
+  .strike {
+    text-decoration: line-through;
+    color: gray;
+  }
+  
