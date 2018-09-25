@@ -66,7 +66,7 @@ class TodoItem extends TinyReact.Component {
     return (
       <li key={this.props.key} className={className} onDblClick={() => this.props.onToggleComplete(this.props.task)}>{this.editView(this.props)}
         <div className="todo-actions">
-          <button type="button" onClick={() => this.props.onDelete(this.props.task)}>
+          <button type="button" className="btnDelete" onClick={() => this.props.onDelete(this.props.task)}>
             <i class="fas fa-trash"></i>
           </button>
           

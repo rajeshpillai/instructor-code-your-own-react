@@ -77,6 +77,10 @@ body {
     font-size: 0.75em;
     padding: 0.5em 0.65em;
   }
+
+  .btnDelete {
+    background-color: lightcoral;
+  }
   button + button {
     margin-left: 0.5em;
   }
