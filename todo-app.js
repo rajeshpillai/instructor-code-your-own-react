@@ -50,7 +50,7 @@ class TodoItem extends TinyReact.Component {
             ref={input => this.textInput = input}
           />
           <button type="button" onClick={() => this.handleEdit(this.props.task)}>
-          <i class="fas fa-save"></i>
+            <i class="fas fa-save"></i>
           </button>
         </span>
       );
@@ -219,13 +219,16 @@ class TodoApp extends TinyReact.Component {
     return (
       <div className="container">
         <Header text="Todo App" />
-        <input type="text" className="addItemInput"
-          onKeyDown={this.onKeyDown}
-          ref={(newTodo) => this.newTodo = newTodo} placeholder="what do you want to do today?" />
-        <button type="button"  className="addItemButton" onClick={this.addTodo} value="Add Todo">Add Todo</button>
-        <button type="button"  onClick={this.sortToDo} value="Sort">
-          {sortIcon}
-        </button>
+
+        <div className="todo-input-container">
+          <input type="text" className="addItemInput"
+            onKeyDown={this.onKeyDown}
+            ref={(newTodo) => this.newTodo = newTodo} placeholder="what do you want to do today?" />
+          <button type="button"  className="addItemButton" onClick={this.addTodo} value="Add Todo">Add Todo</button>
+          <button type="button"  onClick={this.sortToDo} value="Sort">
+            {sortIcon}
+          </button>
+        </div>
         <ul className="todos">
           {tasksUI}
         </ul>

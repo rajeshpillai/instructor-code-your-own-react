@@ -15,9 +15,17 @@ body {
     line-height: 1;
     text-align: center;
   }
+
+  h6 {
+      text-align: center;
+  }
   
   .container p {
     text-align: center;
+  }
+
+  .todo-input-container {
+      text-align: center;
   }
   
   
