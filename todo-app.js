@@ -113,6 +113,10 @@ class TodoApp extends TinyReact.Component {
 
 
   addTodo() {
+    if (this.newTodo.value.trim() == '') {
+      alert("You don't wanna do anything !");
+      return;
+    }
     let newTodo = {
       id: +new Date(),
       title: this.newTodo.value,
