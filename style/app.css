@@ -79,7 +79,7 @@ body {
   }
 
   .btnDelete {
-    background-color: lightcoral;
+    background-color: lightcoral !important;
   }
   button + button {
     margin-left: 0.5em;
