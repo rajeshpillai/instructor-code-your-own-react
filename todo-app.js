@@ -45,7 +45,7 @@ class TodoItem extends TinyReact.Component {
         <span>
           <input
             type="text"
-            className="addItemInput"
+            className="editItemInput"
             value={props.task.title}
             ref={input => this.textInput = input}
           />

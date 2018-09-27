@@ -66,6 +66,12 @@ body {
     height: 1.5em;
     font-size: 90%;
   }
+
+  .editItemInput {
+    width: 14em;
+    height:1.6em;
+  }
+
   /* Buttons */
   button {
     color: white;
