@@ -10,7 +10,6 @@ const root = document.getElementById("root");
 
 // Step 2:  Diffing native elements
 
-
 // Step 4:  Adding support for ref.
 
 // Step 5:  Functional Components
@@ -22,7 +21,6 @@ const root = document.getElementById("root");
 // Step 8:  Stateful Components
 
 // Step 9:  Diffing Stateful Components
-
 
 /***** IMMPLEMENTATION NOTES */
 // Convert the below Hello into its equivalent VDOM.
@@ -39,24 +37,21 @@ var Hello = (
   </div>
 );
 
-
-
-// For Babel to covert this into its equivalent JS code, 
+// For Babel to covert this into its equivalent JS code,
 // We have to implement createElement method.
 
-console.log(Hello);  
+console.log(Hello);
 
 // Step 1 & 2:  Rendering simple native elements
 //TinyReact.render(Hello, root);
-
 
 // Step 3: Diffing Native element
 var NewHello = (
   <div>
     <h1 className="header">Hello Tiny React</h1>
     <h2>(coding nirvana)</h2>
-    <h3>(I said already.  This changed!)</h3>
-    <button onClick={()=>alert("Tiny React!")}>Click me!</button>
+    <h3>(I said already. This changed!)</h3>
+    <button onClick={() => alert("Tiny React!")}>Click me!</button>
   </div>
 );
 
@@ -66,8 +61,7 @@ var NewHello = (
 
 //TinyReact.render(<TodoApp />, root);
 
-
-var Greeting = function (props) {
+var Greeting = function(props) {
   return (
     <div>
       <h1 className="header">Welcome {props.message}</h1>
@@ -83,45 +77,43 @@ var Greeting = function (props) {
 //   TinyReact.render(<Greeting message="Hello Propss"/>, root);
 // }, 2000);
 
-
 class Alert extends TinyReact.Component {
   constructor(props) {
     super(props);
     this.state = {
       title: "Default title"
-    }
+    };
   }
 
   render() {
     return (
       <div className="alert-container">
-        <h2 className="alert-title">
-            Are you sure this works?
-        </h2>
+        <h2 className="alert-title">Are you sure this works?</h2>
         <h3>{this.state.title}</h3>
 
-        <button onClick={()=>{this.setState({title: "New Title"})}}>Change Title</button>
+        <button
+          onClick={() => {
+            this.setState({ title: "New Title" });
+          }}
+        >
+          Change Title
+        </button>
       </div>
-    )
+    );
   }
 }
 
-
-
 //TinyReact.render(<Alert title="Sure ?"/>, root);
 
-
-
 //////******************************* TODO APP */
-let Header = (props) => {
+let Header = props => {
   return (
     <div>
       <h1 style="color:green">{props.text}</h1>
       <h6>(double click on todo to mark as completed)</h6>
-    </div>  
+    </div>
   );
-}
-
+};
 
 class TodoItem extends TinyReact.Component {
   constructor(props) {
@@ -147,11 +139,11 @@ class TodoItem extends TinyReact.Component {
     this.log("TodoItem:cwu: " + this.props.task.title);
   }
 
-  handleEdit = (task) => {
+  handleEdit = task => {
     this.props.onUpdateTask(task.id, this.textInput.value);
-  }
+  };
 
-  editView = (props) => {
+  editView = props => {
     if (props.task.edit) {
       return (
         <span>
@@ -159,10 +151,13 @@ class TodoItem extends TinyReact.Component {
             type="text"
             className="editItemInput"
             value={props.task.title}
-            ref={input => this.textInput = input}
+            ref={input => (this.textInput = input)}
           />
-          <button type="button" onClick={() => this.handleEdit(this.props.task)}>
-            <i class="fas fa-save"></i>
+          <button
+            type="button"
+            onClick={() => this.handleEdit(this.props.task)}
+          >
+            <i class="fas fa-save" />
           </button>
         </span>
       );
@@ -176,13 +171,25 @@ class TodoItem extends TinyReact.Component {
       className += "strike";
     }
     return (
-      <li key={this.props.key} className={className} onDblClick={() => this.props.onToggleComplete(this.props.task)}>{this.editView(this.props)}
+      <li
+        key={this.props.key}
+        className={className}
+        onDblClick={() => this.props.onToggleComplete(this.props.task)}
+      >
+        {this.editView(this.props)}
         <div className="todo-actions">
-          <button type="button" onClick={() => this.props.onToggleEdit(this.props.task)}>
-            <i class="fas fa-edit"></i>
+          <button
+            type="button"
+            onClick={() => this.props.onToggleEdit(this.props.task)}
+          >
+            <i class="fas fa-edit" />
           </button>
-          <button type="button" className="btnDelete" onClick={() => this.props.onDelete(this.props.task)}>
-            <i class="fas fa-trash"></i>
+          <button
+            type="button"
+            className="btnDelete"
+            onClick={() => this.props.onDelete(this.props.task)}
+          >
+            <i class="fas fa-trash" />
           </button>
         </div>
       </li>
@@ -202,7 +209,7 @@ class TodoApp extends TinyReact.Component {
 
     this.state = {
       tasks: [{ id: 1, title: "Task 1", edit: false }],
-      sortOrder: "asc",
+      sortOrder: "asc"
     };
   }
 
@@ -222,9 +229,8 @@ class TodoApp extends TinyReact.Component {
     });
   }
 
-
   addTodo() {
-    if (this.newTodo.value.trim() == '') {
+    if (this.newTodo.value.trim() == "") {
       alert("You don't wanna do anything !");
       return;
     }
@@ -232,10 +238,9 @@ class TodoApp extends TinyReact.Component {
       id: +new Date(),
       title: this.newTodo.value,
       edit: false
-    }
+    };
     this.setState({
-      tasks: [...this.state.tasks,
-        newTodo]
+      tasks: [...this.state.tasks, newTodo]
     });
 
     this.newTodo.value = "";
@@ -246,20 +251,26 @@ class TodoApp extends TinyReact.Component {
     let tasks = null;
     let sortOrder = this.state.sortOrder;
     if (!sortOrder) {
-      tasks = this.state.tasks.sort((a, b) => +(a.title > b.title) || -(a.title < b.title));
+      tasks = this.state.tasks.sort(
+        (a, b) => +(a.title > b.title) || -(a.title < b.title)
+      );
       sortOrder = "asc";
     } else if (sortOrder === "asc") {
       sortOrder = "desc";
-      tasks = this.state.tasks.sort((a, b) => +(b.title > a.title) || -(b.title < a.title));
+      tasks = this.state.tasks.sort(
+        (a, b) => +(b.title > a.title) || -(b.title < a.title)
+      );
     } else {
       sortOrder = "asc";
-      tasks = this.state.tasks.sort((a, b) => +(a.title > b.title) || -(a.title < b.title));
+      tasks = this.state.tasks.sort(
+        (a, b) => +(a.title > b.title) || -(a.title < b.title)
+      );
     }
     this.setState({
       tasks,
       sortOrder
     });
-  }
+  };
 
   onUpdateTask(taskId, newTitle) {
     //alert(newTitle);
@@ -318,39 +329,46 @@ class TodoApp extends TinyReact.Component {
           onDelete={this.deleteTodo}
           onToggleEdit={this.onToggleEdit}
           onToggleComplete={this.onToggleComplete}
-
-          onUpdateTask={this.onUpdateTask}>
-        </TodoItem>
+          onUpdateTask={this.onUpdateTask}
+        />
       );
     });
 
-    let sortIcon = <i class="fas fa-sort-alpha-down"></i>;
+    let sortIcon = <i class="fas fa-sort-alpha-down" />;
     if (this.state.sortOrder === "asc") {
-      sortIcon = <i class="fas fa-sort-alpha-up"></i>;
+      sortIcon = <i class="fas fa-sort-alpha-up" />;
     } else {
-      sortIcon = <i class="fas fa-sort-alpha-down"></i>;
+      sortIcon = <i class="fas fa-sort-alpha-down" />;
     }
 
     return (
       <div className="container">
-        {/* <Header text="Todo App" /> */}
+        <Header text="Todo App" />
 
         <div className="todo-input-container">
-          <input type="text" className="addItemInput"
+          <input
+            type="text"
+            className="addItemInput"
             onKeyDown={this.onKeyDown}
-            ref={(newTodo) => this.newTodo = newTodo} placeholder="what do you want to do today?" />
-          <button type="button"  className="addItemButton" onClick={this.addTodo} value="Add Todo">Add Todo</button>
-          <button type="button"  onClick={this.sortToDo} value="Sort">
+            ref={newTodo => (this.newTodo = newTodo)}
+            placeholder="what do you want to do today?"
+          />
+          <button
+            type="button"
+            className="addItemButton"
+            onClick={this.addTodo}
+            value="Add Todo"
+          >
+            Add Todo
+          </button>
+          <button type="button" onClick={this.sortToDo} value="Sort">
             {sortIcon}
           </button>
         </div>
-        <ul className="todos">
-          {tasksUI}
-        </ul>
+        <ul className="todos">{tasksUI}</ul>
       </div>
     );
   }
 }
 
 TinyReact.render(<TodoApp />, root);
-
