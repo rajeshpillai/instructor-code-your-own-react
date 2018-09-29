@@ -55,11 +55,10 @@ var NewHello = (
   </div>
 );
 
-// setTimeout(function () {
+// setTimeout(function() {
+//   alert("Re-rendering!!");
 //   TinyReact.render(NewHello, root);
-// }, 2000);
-
-//TinyReact.render(<TodoApp />, root);
+// }, 3000);
 
 var Greeting = function(props) {
   return (
@@ -70,12 +69,18 @@ var Greeting = function(props) {
   );
 };
 
-// TinyReact.render(<Greeting message="Hello FS"/>, root);
+//TinyReact.render(<Greeting message="Hello FS" />, root);
 
-// setTimeout(function () {
+// setTimeout(function() {
 //   alert("Re-rendering..");
-//   TinyReact.render(<Greeting message="Hello Propss"/>, root);
+//   TinyReact.render(<Greeting message="Greeeting Voila! Changed!!" />, root);
 // }, 2000);
+
+class Title extends TinyReact.Component {
+  render() {
+    return <h2>Nested Component</h2>;
+  }
+}
 
 class Alert extends TinyReact.Component {
   constructor(props) {
@@ -88,6 +93,7 @@ class Alert extends TinyReact.Component {
   render() {
     return (
       <div className="alert-container">
+        <Title />
         <h2 className="alert-title">Are you sure this works?</h2>
         <h3>{this.state.title}</h3>
 
@@ -103,7 +109,7 @@ class Alert extends TinyReact.Component {
   }
 }
 
-//TinyReact.render(<Alert title="Sure ?"/>, root);
+//TinyReact.render(<Alert title="Sure ?" />, root);
 
 //////******************************* TODO APP */
 let Header = props => {
