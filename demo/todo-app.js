@@ -62,7 +62,7 @@ var NewHello = (
 
 var Greeting = function(props) {
   return (
-    <div>
+    <div className="greeting">
       <h1 className="header">Welcome {props.message}</h1>
       <h2>NOT CHANGED</h2>
     </div>
@@ -110,6 +110,34 @@ class Alert extends TinyReact.Component {
 }
 
 //TinyReact.render(<Alert title="Sure ?" />, root);
+
+
+// Case type change:  old is native and new is component
+let old = (
+  <div>
+    <p>1</p>
+    <p>2</p>
+  </div>
+)
+
+// TinyReact.render(old, root);
+
+// setTimeout(function() {
+//   alert("Re-rendering..");
+//   TinyReact.render(<Alert title="Sure ?" />, root);
+// }, 2000);
+
+//TODO:  Case type change:  old is component and new is native
+// Need to optimize this case (as items are not replaced, but added and removed.)
+
+
+TinyReact.render(<Alert title="Sure ?" />, root);
+
+setTimeout(function() {
+  alert("Re-rendering..");
+  TinyReact.render(old, root);
+}, 2000);
+
 
 //////******************************* TODO APP */
 let Header = props => {
@@ -377,4 +405,4 @@ class TodoApp extends TinyReact.Component {
   }
 }
 
-TinyReact.render(<TodoApp />, root);
+//TinyReact.render(<TodoApp />, root);
