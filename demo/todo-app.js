@@ -131,12 +131,12 @@ let old = (
 // Need to optimize this case (as items are not replaced, but added and removed.)
 
 
-TinyReact.render(<Alert title="Sure ?" />, root);
+//TinyReact.render(<Alert title="Sure ?" />, root);
 
-setTimeout(function() {
-  alert("Re-rendering..");
-  TinyReact.render(old, root);
-}, 2000);
+// setTimeout(function() {
+//   alert("Re-rendering..");
+//   TinyReact.render(old, root);
+// }, 2000);
 
 
 //////******************************* TODO APP */
@@ -405,4 +405,4 @@ class TodoApp extends TinyReact.Component {
   }
 }
 
-//TinyReact.render(<TodoApp />, root);
+TinyReact.render(<TodoApp />, root);
