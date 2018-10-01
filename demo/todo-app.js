@@ -69,7 +69,7 @@ var Greeting = function(props) {
   );
 };
 
-//TinyReact.render(<Greeting message="Hello FS" />, root);
+// TinyReact.render(<Greeting message="Hello FS" />, root);
 
 // setTimeout(function() {
 //   alert("Re-rendering..");
