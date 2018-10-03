@@ -155,9 +155,11 @@ class TodoItem extends TinyReact.Component {
     this.logging = true;
   }
 
-  log(msg) {
+  log(...args) {
     if (this.logging) {
-      console.log(msg);
+      for (let i = 0; i < args.length; i++) {
+        console.log(args[i]);
+      }
     }
   }
   componentDidMount() {
@@ -166,8 +168,14 @@ class TodoItem extends TinyReact.Component {
   componentWillMount() {
     this.log("1. TodoItem:cwu");
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    //let result = nextProps.task != this.props.task;
+    //return result;
+  }
+
   componentWillReceiveProps(nextProps) {
-    this.log("TodoItem:cwrp: ", nextProps);
+    this.log("TodoItem:cwrp: ", JSON.stringify(nextProps));
   }
   componentWillUnmount() {
     this.log("TodoItem:cwu: " + this.props.task.title);
@@ -323,7 +331,9 @@ class TodoApp extends TinyReact.Component {
 
   // Uses setstate with fn argument
   onToggleEdit(task) {
-    var tasks = this.state.tasks.map(t => {
+    let state = JSON.parse(JSON.stringify(this.state));
+
+    let tasks = state.tasks.map(t => {
       if (t.id === task.id) {
         t.edit = !t.edit;
       } else {
@@ -332,12 +342,12 @@ class TodoApp extends TinyReact.Component {
       return t;
     });
 
-    // this.setState({
-    //   tasks
-    // });
-    this.setState((state, props) => ({
+    this.setState({
       tasks
-    }));
+    });
+    // this.setState((state, props) => ({
+    //   tasks
+    // }));
   }
 
   onToggleComplete(task) {
@@ -377,7 +387,7 @@ class TodoApp extends TinyReact.Component {
 
     return (
       <div className="container">
-        <Header text="Todo App" />
+        {/* <Header text="Todo App" /> */}
 
         <div className="todo-input-container">
           <input
