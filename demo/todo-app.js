@@ -226,13 +226,13 @@ class TodoItem extends TinyReact.Component {
           >
             <i class="fas fa-edit" />
           </button>
-          <button
+          {/* <button
             type="button"
             className="btnDelete"
             onClick={() => this.props.onDelete(this.props.task)}
           >
             <i class="fas fa-trash" />
-          </button>
+          </button> */}
         </div>
       </li>
     );
@@ -389,7 +389,7 @@ class TodoApp extends TinyReact.Component {
       <div className="container">
         {/* <Header text="Todo App" /> */}
 
-        <div className="todo-input-container">
+        {/* <div className="todo-input-container">
           <input
             type="text"
             className="addItemInput"
@@ -408,7 +408,7 @@ class TodoApp extends TinyReact.Component {
           <button type="button" onClick={this.sortToDo} value="Sort">
             {sortIcon}
           </button>
-        </div>
+        </div> */}
         <ul className="todos">{tasksUI}</ul>
       </div>
     );
