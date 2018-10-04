@@ -170,8 +170,8 @@ class TodoItem extends TinyReact.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    //let result = nextProps.task != this.props.task;
-    //return result;
+    let result = nextProps.task != this.props.task;
+    return result;
   }
 
   componentWillReceiveProps(nextProps) {
