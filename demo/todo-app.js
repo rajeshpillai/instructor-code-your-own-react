@@ -1,4 +1,8 @@
 /**** Demo *****/
+// preact.createElement
+// React.createElement
+// TinyReact.createElement
+
 /** @jsx TinyReact.createElement */
 const root = document.getElementById("root");
 
@@ -26,6 +30,12 @@ const root = document.getElementById("root");
 // Convert the below Hello into its equivalent VDOM.
 
 // Step 0:  createElement
+
+//let TinyReact = preact;
+
+// let TinyReact = {};
+// TinyReact.Component = preact.Component;
+// TinyReact.render = preact.render
 
 var Hello = (
   <div>
@@ -143,7 +153,7 @@ let old = (
 let Header = props => {
   return (
     <div>
-      <h1 style="color:green">{props.text}</h1>
+      <h1 stylexx="color:green">{props.text}</h1>
       <h6>(double click on todo to mark as completed)</h6>
     </div>
   );
@@ -319,11 +329,9 @@ class TodoApp extends TinyReact.Component {
     //let state = JSON.parse(JSON.stringify(this.state));
 
     var tasks = this.state.tasks.map(t => {
-      if (t.id === taskId) {
-        t.title = newTitle;
-        t.edit = !t.edit;
-      }
-      return t;
+      return t.id !== taskId ?
+        t :
+        Object.assign({}, t, {title: newTitle, edit: !t.edit});
     });
 
     this.setState({
@@ -336,12 +344,9 @@ class TodoApp extends TinyReact.Component {
     //let state = JSON.parse(JSON.stringify(this.state));
 
     let tasks = this.state.tasks.map(t => {
-      if (t.id === task.id) {
-        t.edit = !t.edit;
-      } else {
-        //t.edit = false; // Force, due to bug in ref.
-      }
-      return t;
+      return t.id !== task.id ?
+				t :
+				Object.assign({}, t, {edit: !t.edit});
     });
 
     this.setState({
@@ -353,11 +358,10 @@ class TodoApp extends TinyReact.Component {
   }
 
   onToggleComplete(task) {
-    var tasks = this.state.tasks.map(t => {
-      if (t.id === task.id) {
-        t.completed = !t.completed;
-      }
-      return t;
+    let tasks = this.state.tasks.map(t => {
+      return t.id !== task.id ?
+				t :
+				Object.assign({}, t, {completed: !t.completed});
     });
 
     this.setState({
@@ -380,18 +384,18 @@ class TodoApp extends TinyReact.Component {
       );
     });
 
-    let sortIcon = <i class="fas fa-sort-alpha-down" />;
+    let sortIcon = <i className="fas fa-sort-alpha-down" />;
     if (this.state.sortOrder === "asc") {
-      sortIcon = <i class="fas fa-sort-alpha-up" />;
+      sortIcon = <i className="fas fa-sort-alpha-up" />;
     } else {
-      sortIcon = <i class="fas fa-sort-alpha-down" />;
+      sortIcon = <i className="fas fa-sort-alpha-down" />;
     }
 
     return (
       <div className="container">
-        {/* <Header text="Todo App" /> */}
+        <Header text="Todo App" />
 
-        {/* <div className="todo-input-container">
+        <div className="todo-input-container">
           <input
             type="text"
             className="addItemInput"
@@ -410,7 +414,7 @@ class TodoApp extends TinyReact.Component {
           <button type="button" onClick={this.sortToDo} value="Sort">
             {sortIcon}
           </button>
-        </div> */}
+        </div>
         <ul className="todos">{tasksUI}</ul>
       </div>
     );
