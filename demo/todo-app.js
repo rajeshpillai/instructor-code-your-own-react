@@ -40,7 +40,7 @@ var Hello = (
 // For Babel to covert this into its equivalent JS code,
 // We have to implement createElement method.
 
-console.log(Hello);
+//console.log(Hello);
 
 // Step 1 & 2:  Rendering simple native elements
 //TinyReact.render(Hello, root);
@@ -199,7 +199,7 @@ class TodoItem extends TinyReact.Component {
             type="button"
             onClick={() => this.handleEdit(this.props.task)}
           >
-            <i class="fas fa-save" />
+            <i className="fas fa-save" />
           </button>
         </span>
       );
@@ -224,15 +224,15 @@ class TodoItem extends TinyReact.Component {
             type="button"
             onClick={() => this.props.onToggleEdit(this.props.task)}
           >
-            <i class="fas fa-edit" />
+            <i className="fas fa-edit" />
           </button>
-          {/* <button
+          <button
             type="button"
             className="btnDelete"
             onClick={() => this.props.onDelete(this.props.task)}
           >
-            <i class="fas fa-trash" />
-          </button> */}
+            <i className="fas fa-trash" />
+          </button>
         </div>
       </li>
     );
@@ -316,6 +316,8 @@ class TodoApp extends TinyReact.Component {
 
   onUpdateTask(taskId, newTitle) {
     //alert(newTitle);
+    //let state = JSON.parse(JSON.stringify(this.state));
+
     var tasks = this.state.tasks.map(t => {
       if (t.id === taskId) {
         t.title = newTitle;
@@ -331,9 +333,9 @@ class TodoApp extends TinyReact.Component {
 
   // Uses setstate with fn argument
   onToggleEdit(task) {
-    let state = JSON.parse(JSON.stringify(this.state));
+    //let state = JSON.parse(JSON.stringify(this.state));
 
-    let tasks = state.tasks.map(t => {
+    let tasks = this.state.tasks.map(t => {
       if (t.id === task.id) {
         t.edit = !t.edit;
       } else {
