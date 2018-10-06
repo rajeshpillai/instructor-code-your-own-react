@@ -1,41 +1,9 @@
 /**** Demo *****/
-// preact.createElement
-// React.createElement
-// TinyReact.createElement
-
-/** @jsx TinyReact.createElement */
+/** @jsx preact.createElement */
 const root = document.getElementById("root");
 
-// Step 0:  createElement
-
-// Step 1:  Rendering simple native elements
-
-// Step 1.1 : Setting props and event handlers
-
-// Step 2:  Diffing native elements
-
-// Step 4:  Adding support for ref.
-
-// Step 5:  Functional Components
-
-// Step 6:  Props
-
-// Step 7:  Diffing functional Components
-
-// Step 8:  Stateful Components
-
-// Step 9:  Diffing Stateful Components
-
-/***** IMMPLEMENTATION NOTES */
-// Convert the below Hello into its equivalent VDOM.
-
-// Step 0:  createElement
-
-//let TinyReact = preact;
-
-// let TinyReact = {};
-// TinyReact.Component = preact.Component;
-// TinyReact.render = preact.render
+let Component = preact.Component;
+let render = preact.render;
 
 var Hello = (
   <div>
@@ -86,13 +54,13 @@ var Greeting = function(props) {
 //   TinyReact.render(<Greeting message="Greeeting Voila! Changed!!" />, root);
 // }, 2000);
 
-class Title extends TinyReact.Component {
+class Title extends Component {
   render() {
     return <h2>Nested Component</h2>;
   }
 }
 
-class Alert extends TinyReact.Component {
+class Alert extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -119,7 +87,7 @@ class Alert extends TinyReact.Component {
   }
 }
 
-//TinyReact.render(<Alert title="Sure ?" />, root);
+//React.render(<Alert title="Sure ?" />, root);
 
 
 // Case type change:  old is native and new is component
@@ -130,18 +98,18 @@ let old = (
   </div>
 )
 
-// TinyReact.render(old, root);
+// React.render(old, root);
 
 // setTimeout(function() {
 //   alert("Re-rendering..");
-//   TinyReact.render(<Alert title="Sure ?" />, root);
+//   ReactDOM.render(<Alert title="Sure ?" />, root);
 // }, 2000);
 
 //TODO:  Case type change:  old is component and new is native
 // Need to optimize this case (as items are not replaced, but added and removed.)
 
 
-// TinyReact.render(<Alert title="Sure ?" />, root);
+// ReactDOM.render(<Alert title="Sure ?" />, root);
 
 // setTimeout(function() {
 //   alert("Re-rendering..");
@@ -159,7 +127,7 @@ let Header = props => {
   );
 };
 
-class TodoItem extends TinyReact.Component {
+class TodoItem extends Component {
   constructor(props) {
     super(props);
     this.logging = true;
@@ -249,7 +217,7 @@ class TodoItem extends TinyReact.Component {
   }
 }
 
-class TodoApp extends TinyReact.Component {
+class TodoApp extends Component {
   constructor(props) {
     super(props);
     this.addTodo = this.addTodo.bind(this);
@@ -373,7 +341,7 @@ class TodoApp extends TinyReact.Component {
     let tasksUI = this.state.tasks.map((task, index) => {
       return (
         <TodoItem
-          key={task.id}
+          keyxx={task.id}
           task={task}
           index={index}
           onDelete={this.deleteTodo}
@@ -393,7 +361,7 @@ class TodoApp extends TinyReact.Component {
 
     return (
       <div className="container">
-        <Header text="Todo App (TinyReact)" />
+        <Header text="Todo App (preact)" />
 
         <div className="todo-input-container">
           <input
@@ -421,4 +389,4 @@ class TodoApp extends TinyReact.Component {
   }
 }
 
-TinyReact.render(<TodoApp />, root);
+render(<TodoApp />, root);
