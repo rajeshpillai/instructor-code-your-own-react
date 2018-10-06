@@ -153,11 +153,12 @@ let old = (
 let Header = props => {
   return (
     <div>
-      <h1 stylexx="color:green">{props.text}</h1>
+      <h1 style="color:green">{props.text}</h1>
       <h6>(double click on todo to mark as completed)</h6>
     </div>
   );
 };
+
 
 class TodoItem extends TinyReact.Component {
   constructor(props) {

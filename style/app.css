@@ -20,7 +20,22 @@ body {
       text-align: center;
       margin-top:6px;
   }
+
+  .top-menu {
+    background-color: skyblue;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .top-menu a {
+    display: inline-block;
+    padding: 5px;
+  }
   
+  .top-menu a:hover{
+    background-color: yellow;
+  }
   .container p {
     text-align: center;
   }
