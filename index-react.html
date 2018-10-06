@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Code your own ReactJS</title>
+
+    <!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
+    <script type="text/javascript" src="./scripts/babel.min.js"></script>
+
+    <link rel="stylesheet" href="./style/fontawesome/all.css" />
+    <link rel="stylesheet" href="./style/app.css" />
+    <style>
+        .todos {
+            user-select: none;
+        }
+
+        .todo-actions {
+            display: inline-block;
+            padding-left: 40px;
+        }
+
+        .todo-item {
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        .todo-item-completed {
+            text-decoration: line-through;
+            background-color: darkgreen;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+
+    <script src="https://unpkg.com/lodash@4.17.11/lodash.js"></script>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script type="text/babel" src="./demo/todo-app-react.js"></script>
+
+</body>
+
+</html>
