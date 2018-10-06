@@ -141,7 +141,7 @@ let old = (
 // Need to optimize this case (as items are not replaced, but added and removed.)
 
 
-//TinyReact.render(<Alert title="Sure ?" />, root);
+// TinyReact.render(<Alert title="Sure ?" />, root);
 
 // setTimeout(function() {
 //   alert("Re-rendering..");
