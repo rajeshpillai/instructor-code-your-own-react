@@ -10,7 +10,7 @@ var Hello = (
     <h1 className="header">Hello Tiny React!</h1>
     <h2>(coding nirvana)</h2>
     <h3>(OBSERVE: This will change)</h3>
-    {2==1 && <div>Render this if 2==1</div>}
+    {2 == 1 && <div>Render this if 2==1</div>}
     <button onClick={() => alert("Hi!")}>Click me!</button>
     <h3>This will be deleted</h3>
     2,3
@@ -44,11 +44,12 @@ var NewHello = (
 //   TinyReact.render(NewHello, root);
 // }, 3000);
 
-var Greeting = function(props) {
+var Greeting = function (props) {
   return (
     <div className="greeting">
       <h1 className="header">Welcome {props.message}</h1>
       <h2>NOT CHANGED</h2>
+      <div>{props.children}</div>
     </div>
   );
 };
@@ -305,7 +306,7 @@ class TodoApp extends Component {
     var tasks = this.state.tasks.map(t => {
       return t.id !== taskId ?
         t :
-        Object.assign({}, t, {title: newTitle, edit: !t.edit});
+        Object.assign({}, t, { title: newTitle, edit: !t.edit });
     });
 
     this.setState({
@@ -319,8 +320,8 @@ class TodoApp extends Component {
 
     let tasks = this.state.tasks.map(t => {
       return t.id !== task.id ?
-				t :
-				Object.assign({}, t, {edit: !t.edit});
+        t :
+        Object.assign({}, t, { edit: !t.edit });
     });
 
     this.setState({
@@ -334,8 +335,8 @@ class TodoApp extends Component {
   onToggleComplete(task) {
     let tasks = this.state.tasks.map(t => {
       return t.id !== task.id ?
-				t :
-				Object.assign({}, t, {completed: !t.completed});
+        t :
+        Object.assign({}, t, { completed: !t.completed });
     });
 
     this.setState({
@@ -395,4 +396,19 @@ class TodoApp extends Component {
   }
 }
 
-render(<TodoApp />, root);
+/// Nesting functional component
+var Footer = function (props) {
+  return (
+    <h4>{props.children}</h4>
+  );
+}
+
+render(
+  <Greeting message="Good Day!!">
+    <Footer>&copy; free to use</Footer>
+  </Greeting>,
+  root);
+
+
+
+//render(<TodoApp />, root);
