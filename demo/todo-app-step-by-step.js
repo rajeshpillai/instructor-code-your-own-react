@@ -132,10 +132,51 @@ class Alert extends TinyReact.Component {
         >
           Change Title
         </button>
+
+        <button
+          onClick={() => {
+            this.setState((prevState, props) => {
+              return {
+                title: "from functional setState"
+              }
+            });
+          }}
+        >
+          Change Title using functional setState
+        </button>
+
         <Footer>&copy; free to use</Footer>
       </div>
     );
   }
 }
 
-TinyReact.render(<Alert title="Sure ?" />, root);
+//TinyReact.render(<Alert title="Sure ?" />, root);
+
+// Diffing state ful component
+
+class TodoItem extends TinyReact.Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+  }
+  render() {
+    return (
+      <div>
+        <h2>{this.props.title.toString()}</h2>
+        <button onClick={update}>Update</button>
+      </div>
+    );
+  }
+}
+
+TinyReact.render(<TodoItem title="Task 1" />, root);
+
+function update() {
+  TinyReact.render(<TodoItem title={new Date()} />, root);
+}
+
+// setTimeout(function () {
+//   alert("Re-rendering in 3 seconds!!");
+//   TinyReact.render(<TodoItem title="Task 2" />, root);
+// }, 3000);

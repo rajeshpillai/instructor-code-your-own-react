@@ -396,19 +396,27 @@ class TodoApp extends Component {
   }
 }
 
-/// Nesting functional component
-var Footer = function (props) {
-  return (
-    <h4>{props.children}</h4>
-  );
+
+
+class TodoItemx extends Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+  }
+  render() {
+    return (
+      <div>
+        <h2>{this.props.title.toString()}</h2>
+        <button onClick={update}>Update</button>
+      </div>
+    );
+  }
 }
 
-render(
-  <Greeting message="Good Day!!">
-    <Footer>&copy; free to use</Footer>
-  </Greeting>,
-  root);
+render(<TodoItemx title="Task 1" />, root);
 
-
+function update() {
+  render(<TodoItemx title={new Date()} />, root);
+}
 
 //render(<TodoApp />, root);
