@@ -7,13 +7,19 @@ let render = preact.render;
 
 var Hello = (
   <div>
-    <h1 className="header">Hello React!</h1>
+    <h1 className="header">Hello Tiny React!</h1>
     <h2>(coding nirvana)</h2>
-    <h3>(This will change)</h3>
+    <h3>(OBSERVE: This will change)</h3>
+    {2==1 && <div>Render this if 2==1</div>}
     <button onClick={() => alert("Hi!")}>Click me!</button>
     <h3>This will be deleted</h3>
+    2,3
   </div>
 );
+
+console.log(Hello);
+
+//render(Hello, root);
 
 // For Babel to covert this into its equivalent JS code,
 // We have to implement createElement method.
