@@ -153,9 +153,8 @@ class Alert extends TinyReact.Component {
 
 //TinyReact.render(<Alert title="Sure ?" />, root);
 
-// Diffing state ful component
-
-class TodoItem extends TinyReact.Component {
+// Step 17 -> Diffing stateful component
+class Stateful extends TinyReact.Component {
   constructor(props) {
     super(props);
     console.log(props);
@@ -170,13 +169,45 @@ class TodoItem extends TinyReact.Component {
   }
 }
 
-TinyReact.render(<TodoItem title="Task 1" />, root);
+//TinyReact.render(<Stateful title="Task 1" />, root);
 
 function update() {
-  TinyReact.render(<TodoItem title={new Date()} />, root);
+  TinyReact.render(<Stateful title={new Date()} />, root);
 }
 
-// setTimeout(function () {
-//   alert("Re-rendering in 3 seconds!!");
-//   TinyReact.render(<TodoItem title="Task 2" />, root);
-// }, 3000);
+
+// Step 18 -> Adding ref support
+class TodoItem extends TinyReact.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      task: {
+        title: "Task 1"
+      }
+    }
+    this.updateTodo = this.updateTodo.bind(this);
+  }
+
+  updateTodo() {
+    let newValue = this.input.value;  // grab the dom and get the value
+    let task = Object.assign({}, this.state.task);
+    task.title = newValue;
+    this.setState({
+      task
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>{this.state.task.title}</h2>
+        <input type="text" ref={(input) => { this.input = input }}></input>
+        <button onClick={this.updateTodo}>Update</button>
+      </div>
+    );
+  }
+}
+
+TinyReact.render(<TodoItem />, root);
+
+
