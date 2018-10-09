@@ -407,11 +407,11 @@ class TodoItemx extends React.Component {
   }
 }
 
-ReactDOM.render(<TodoItemx title="Task 1" />, root);
+// ReactDOM.render(<TodoItemx title="Task 1" />, root);
 
-function update() {
-  ReactDOM.render(<TodoItemx title={new Date()} />, root);
-}
+// function update() {
+//   ReactDOM.render(<TodoItemx title={new Date()} />, root);
+// }
 
 
-//ReactDOM.render(<TodoApp />, root);
+ReactDOM.render(<TodoApp />, root);

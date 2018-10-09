@@ -413,10 +413,10 @@ class TodoItemx extends Component {
   }
 }
 
-render(<TodoItemx title="Task 1" />, root);
+// render(<TodoItemx title="Task 1" />, root);
 
-function update() {
-  render(<TodoItemx title={new Date()} />, root);
-}
+// function update() {
+//   render(<TodoItemx title={new Date()} />, root);
+// }
 
-//render(<TodoApp />, root);
+render(<TodoApp />, root);
