@@ -208,6 +208,21 @@ class TodoItem extends TinyReact.Component {
   }
 }
 
-TinyReact.render(<TodoItem />, root);
+//TinyReact.render(<TodoItem />, root);
+
+// Step 19-> Old is component and new is native dom
+
+let newElement = (
+  <div>
+    <p>1</p>
+    <p>2</p>
+  </div>
+);
 
 
+TinyReact.render(<Alert title="Sure ?" />, root);
+
+setTimeout(function () {
+  alert("Re-rendering in 5 seconds..");
+  TinyReact.render(newElement, root);
+}, 5000);
