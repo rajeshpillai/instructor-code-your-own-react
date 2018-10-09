@@ -276,7 +276,7 @@ class TodoItem extends TinyReact.Component {
     this.log("2. TodoItem:cdm");
   }
   componentWillMount() {
-    this.log("1. TodoItem:cwu");
+    this.log("1. TodoItem:cwm");
   }
 
   shouldComponentUpdate(nextProps, nextState) {
