@@ -248,6 +248,16 @@ class EventTest extends TinyReact.Component {
 
 //TinyReact.render(<EventTest />, root);
 
+
+
+// Test children
+
+const Button = (props) => <button>{props.children}</button>;
+const Heart = () => <span>&hearts;</span>;
+
+//TinyReact.render(<Button>I <Heart/> React</Button>, root);
+
+
 //////******************************* TODO APP */
 let Header = props => {
   return (
@@ -514,6 +524,9 @@ class TodoApp extends TinyReact.Component {
           <button type="button" onClick={this.sortToDo} value="Sort">
             {sortIcon}
           </button>
+
+          
+          
         </div>
         <ul className="todos">{tasksUI}</ul>
       </div>
@@ -522,6 +535,7 @@ class TodoApp extends TinyReact.Component {
 }
 
 TinyReact.render(<TodoApp />, root);
+
 
 
 
