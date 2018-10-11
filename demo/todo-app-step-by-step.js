@@ -57,6 +57,14 @@ var Greeting = function (props) {
 
 //TinyReact.render(<Greeting />, root);
 
+// Test children
+
+const Button = (props) => <button>{props.children}</button>;
+const Heart = () => <span>&hearts;</span>;
+
+//TinyReact.render(<Button>I <Heart/> React</Button>, root);
+
+
 
 var GreetingWithProps = function (props) {
   return (
@@ -249,13 +257,6 @@ class EventTest extends TinyReact.Component {
 //TinyReact.render(<EventTest />, root);
 
 
-
-// Test children
-
-const Button = (props) => <button>{props.children}</button>;
-const Heart = () => <span>&hearts;</span>;
-
-//TinyReact.render(<Button>I <Heart/> React</Button>, root);
 
 
 //////******************************* TODO APP */
