@@ -335,6 +335,8 @@ class TodoItem extends TinyReact.Component {
     }
     return (
       <li
+        style={{ borderBottom: "1px dashed gray", color: "red" }}
+
         key={this.props.key}
         className={className}
         onDblClick={() => this.props.onToggleComplete(this.props.task)}
@@ -526,10 +528,10 @@ class TodoApp extends TinyReact.Component {
             {sortIcon}
           </button>
 
-          
-          
         </div>
-        <ul className="todos">{tasksUI}</ul>
+        <ul className="todos" >
+          {tasksUI}
+        </ul>
       </div>
     );
   }
