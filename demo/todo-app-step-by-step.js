@@ -541,39 +541,41 @@ let MyContext = TinyReact.createContext();
 
 class Message2 extends TinyReact.Component {
   render() {
-    return (<MyContext.Consumer>
-      {
-        (context) => {
-          return (<div>
-            NewHello {context}
-            <div>Hardcoded</div>
-          </div>
-          )
-        }
-      }
-    </MyContext.Consumer>
+    return (
+      <span>{"message 2"}</span>
     );
+    // return (<MyContext.Consumer>
+    //   {
+    //     (context) => {
+    //       return (<div>
+    //         NewHello {context}
+    //         <div>Hardcoded</div>
+    //       </div>
+    //       )
+    //     }
+    //   }
+    // </MyContext.Consumer>
+    // );
   }
 }
 
 class Message extends TinyReact.Component {
   render() {
-    // return (
-    //   <div>
-    //     Hello {"context"}
-    //   </div>
-    // )
-    return (<MyContext.Consumer>
-      {
-        (context) => {
-          return (
-            <div>
-              <div>Hello {context}</div>
-            </div>
-          )
-        }
-      }
-    </MyContext.Consumer>
+    return (
+      <div>
+        <MyContext.Consumer>
+          {
+            (context) => {
+              return (
+                <div>
+                  <div>Hello {context}</div>
+                  <div>This should not udpate!</div>
+                </div>
+              )
+            }
+          }
+        </MyContext.Consumer>
+      </div>
     );
   }
 }
@@ -647,17 +649,33 @@ class TestRenderProps extends TinyReact.Component {
 TinyReact.render(
   <div>
     {/* <TodoApp /> */}
-    <div>
-      {/* <MyProvider>
-        <Message />
-        <Message2 />
-      </MyProvider> */}
+    {/* <div> */}
+    <MyProvider>
+      <Message />
+      {/* <Message2 /> */}
+      {/* <MyContext.Consumer>
+        {
+          (context) => {
+            return (
+              <div>
+                <div>Hello {context}</div>
+                <div>This should not udpate!</div>
+              </div>
+            )
+          }
+        }
+      </MyContext.Consumer> */}
+    </MyProvider>
 
-      <TestRenderProps />
+    {/* <TestRenderProps /> */}
 
-    </div>
+    {/* </div> */}
   </div>,
   root);
+
+console.log(<MyProvider>
+  <Message />
+</MyProvider>);
 
 
 
