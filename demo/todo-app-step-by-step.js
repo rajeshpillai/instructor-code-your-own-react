@@ -539,6 +539,23 @@ class TodoApp extends TinyReact.Component {
 
 let MyContext = TinyReact.createContext();
 
+class Message2 extends TinyReact.Component {
+  render() {
+    return (<MyContext.Consumer>
+      {
+        (context) => {
+          return (<div>
+            NewHello {context}
+            <div>Hardcoded</div>
+          </div>
+          )
+        }
+      }
+    </MyContext.Consumer>
+    );
+  }
+}
+
 class Message extends TinyReact.Component {
   render() {
     // return (
@@ -549,9 +566,10 @@ class Message extends TinyReact.Component {
     return (<MyContext.Consumer>
       {
         (context) => {
-          return (<div>
-            Hello {context}
-          </div>
+          return (
+            <div>
+              <div>Hello {context}</div>
+            </div>
           )
         }
       }
@@ -561,11 +579,67 @@ class Message extends TinyReact.Component {
 }
 
 class MyProvider extends TinyReact.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 1
+    }
+  }
+
+  click = () => {
+    //alert();
+    this.setState({
+      value: this.state.value + 1
+    })
+  }
   render() {
     return (
-      <MyContext.Provider value={"hello"}>
-        {this.props.children}
-      </MyContext.Provider>
+      <div>
+        <input type="button" value="Click" onClick={this.click} />
+        <MyContext.Provider value={this.state.value}>
+          {this.props.children}
+        </MyContext.Provider>
+      </div>
+
+    );
+  }
+}
+
+
+class RenderProps extends TinyReact.Component {
+  constructor(props) {
+    super(props);
+    this.state = { counter: 0 };
+  }
+  componentDidMount() {
+    var self = this;
+    document.addEventListener("click", () => {
+      self.setState({
+        counter: ++self.state.counter
+      });
+    });
+  }
+  render() {
+    return (
+      this.props.children[0](this.state.counter)
+    );
+  }
+}
+
+class TestRenderProps extends TinyReact.Component {
+  render() {
+    return (
+      <RenderProps>
+        {
+          (date) => {
+            return (
+              <div>
+                Render Props  {date}
+              </div>
+            )
+          }
+        }
+      </RenderProps>
     );
   }
 }
@@ -573,9 +647,15 @@ class MyProvider extends TinyReact.Component {
 TinyReact.render(
   <div>
     {/* <TodoApp /> */}
-    <MyProvider>
-      <Message />
-    </MyProvider>
+    <div>
+      {/* <MyProvider>
+        <Message />
+        <Message2 />
+      </MyProvider> */}
+
+      <TestRenderProps />
+
+    </div>
   </div>,
   root);
 
