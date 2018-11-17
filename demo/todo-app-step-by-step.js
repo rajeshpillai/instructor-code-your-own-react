@@ -19,7 +19,7 @@ var Step1 = (
   </div>
 );
 
-console.log(Step1);
+//console.log(Step1);
 
 // Step 5,6,7 -> Render native dom elements
 
@@ -537,7 +537,47 @@ class TodoApp extends TinyReact.Component {
   }
 }
 
-TinyReact.render(<TodoApp />, root);
+let MyContext = TinyReact.createContext();
+
+class Message extends TinyReact.Component {
+  render() {
+    // return (
+    //   <div>
+    //     Hello {"context"}
+    //   </div>
+    // )
+    return (<MyContext.Consumer>
+      {
+        (context) => {
+          return (<div>
+            Hello {context}
+          </div>
+          )
+        }
+      }
+    </MyContext.Consumer>
+    );
+  }
+}
+
+class MyProvider extends TinyReact.Component {
+  render() {
+    return (
+      <MyContext.Provider value={"hello"}>
+        {this.props.children}
+      </MyContext.Provider>
+    );
+  }
+}
+
+TinyReact.render(
+  <div>
+    {/* <TodoApp /> */}
+    <MyProvider>
+      <Message />
+    </MyProvider>
+  </div>,
+  root);
 
 
 
