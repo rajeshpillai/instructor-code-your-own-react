@@ -537,146 +537,210 @@ class TodoApp extends TinyReact.Component {
   }
 }
 
-let MyContext = TinyReact.createContext();
+// let MyContext = TinyReact.createContext();
 
-class Message2 extends TinyReact.Component {
-  render() {
-    return (
-      <span>{"message 2"}</span>
-    );
-    // return (<MyContext.Consumer>
-    //   {
-    //     (context) => {
-    //       return (<div>
-    //         NewHello {context}
-    //         <div>Hardcoded</div>
-    //       </div>
-    //       )
-    //     }
-    //   }
-    // </MyContext.Consumer>
-    // );
-  }
-}
+// class Message2 extends TinyReact.Component {
+//   render() {
+//     return (
+//       <span>{"message 2"}</span>
+//     );
+//     // return (<MyContext.Consumer>
+//     //   {
+//     //     (context) => {
+//     //       return (<div>
+//     //         NewHello {context}
+//     //         <div>Hardcoded</div>
+//     //       </div>
+//     //       )
+//     //     }
+//     //   }
+//     // </MyContext.Consumer>
+//     // );
+//   }
+// }
 
-class Message extends TinyReact.Component {
-  render() {
-    return (
-      <div>
-        <MyContext.Consumer>
-          {
-            (context) => {
-              return (
-                <div>
-                  <div>Hello {context}</div>
-                  <div>This should not udpate!</div>
-                </div>
-              )
-            }
-          }
-        </MyContext.Consumer>
-      </div>
-    );
-  }
-}
+// class Message extends TinyReact.Component {
+//   render() {
+//     return (
+//       <div>
+//         <MyContext.Consumer>
+//           {
+//             (context) => {
+//               return (
+//                 <div>
+//                   <div>Hello {context}</div>
+//                   <div>This should not udpate!</div>
+//                 </div>
+//               )
+//             }
+//           }
+//         </MyContext.Consumer>
+//       </div>
+//     );
+//   }
+// }
 
-class MyProvider extends TinyReact.Component {
-  constructor(props) {
+// class MyProvider extends TinyReact.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       value: 1
+//     }
+//   }
+
+//   click = () => {
+//     //alert();
+//     this.setState({
+//       value: this.state.value + 1
+//     })
+//   }
+//   render() {
+//     return (
+//       <div>
+//         <input type="button" value="Click" onClick={this.click} />
+//         <MyContext.Provider value={this.state.value}>
+//           {this.props.children}
+//         </MyContext.Provider>
+//       </div>
+
+//     );
+//   }
+// }
+
+
+// class RenderProps extends TinyReact.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = { counter: 0 };
+//   }
+//   componentDidMount() {
+//     var self = this;
+//     document.addEventListener("click", () => {
+//       self.setState({
+//         counter: ++self.state.counter
+//       });
+//     });
+//   }
+//   render() {
+//     return (
+//       this.props.children[0](this.state.counter)
+//     );
+//   }
+// }
+
+// class TestRenderProps extends TinyReact.Component {
+//   render() {
+//     return (
+//       <RenderProps>
+//         {
+//           (date) => {
+//             return (
+//               <div>
+//                 Render Props  {date}
+//               </div>
+//             )
+//           }
+//         }
+//       </RenderProps>
+//     );
+//   }
+// }
+
+// TinyReact.render(
+//   <div>
+//     {/* <TodoApp /> */}
+//     {/* <div> */}
+//     <MyProvider>
+//       <Message />
+//       {/* <Message2 /> */}
+//       {/* <MyContext.Consumer>
+//         {
+//           (context) => {
+//             return (
+//               <div>
+//                 <div>Hello {context}</div>
+//                 <div>This should not udpate!</div>
+//               </div>
+//             )
+//           }
+//         }
+//       </MyContext.Consumer> */}
+//     </MyProvider>
+
+//     {/* <TestRenderProps /> */}
+
+//     {/* </div> */}
+//   </div>,
+//   root);
+
+// console.log(<MyProvider>
+//   <Message />
+// </MyProvider>);
+
+
+//SetState
+class Counter extends TinyReact.Component {
+  constructor(props){
     super(props);
-    this.state = {
-      value: 1
+    this.state={
+      count:0
     }
   }
-
-  click = () => {
-    //alert();
+  onClick(){
+    
+    console.log("setState 1 ************************************");
     this.setState({
-      value: this.state.value + 1
+      count:this.state.count+1
+    },()=>{
+      console.log("callback 1 ********************************88")
+      this.setState({
+        count:this.state.count+1
+      })
     })
+
+    console.log("setState 2 ************************************");
+    this.setState({
+      count:this.state.count+1
+    },()=>{
+      console.log("callback 2 ********************************88")
+      this.setState({
+        count:"aaaaaa" + this.state.count
+      })
+    })
+
+    // console.log("setState 2 ************************************");
+    // this.setState({
+    //   count:this.state.count+1
+    // },()=>{
+    //   console.log("callback 2 ********************************88")
+    //   this.setState({
+    //     count:this.state.count+1
+    //   })
+    // })
+
+    // console.log("setState 3 ************************************");
+    // this.setState({
+    //   count:this.state.count+1
+    // },()=>{
+    //   console.log("callback 3 ********************************88")
+    //   this.setState({
+    //     count:this.state.count+1
+    //   })
+    // })
+
   }
   render() {
+    console.log("Render() called ***************************");
     return (
       <div>
-        <input type="button" value="Click" onClick={this.click} />
-        <MyContext.Provider value={this.state.value}>
-          {this.props.children}
-        </MyContext.Provider>
+        <span>{this.state.count}</span>
+        <input type="button" value="Click" onClick={() =>{this.onClick()}}  />
       </div>
-
-    );
+    ) 
   }
 }
 
-
-class RenderProps extends TinyReact.Component {
-  constructor(props) {
-    super(props);
-    this.state = { counter: 0 };
-  }
-  componentDidMount() {
-    var self = this;
-    document.addEventListener("click", () => {
-      self.setState({
-        counter: ++self.state.counter
-      });
-    });
-  }
-  render() {
-    return (
-      this.props.children[0](this.state.counter)
-    );
-  }
-}
-
-class TestRenderProps extends TinyReact.Component {
-  render() {
-    return (
-      <RenderProps>
-        {
-          (date) => {
-            return (
-              <div>
-                Render Props  {date}
-              </div>
-            )
-          }
-        }
-      </RenderProps>
-    );
-  }
-}
-
-TinyReact.render(
-  <div>
-    {/* <TodoApp /> */}
-    {/* <div> */}
-    <MyProvider>
-      <Message />
-      {/* <Message2 /> */}
-      {/* <MyContext.Consumer>
-        {
-          (context) => {
-            return (
-              <div>
-                <div>Hello {context}</div>
-                <div>This should not udpate!</div>
-              </div>
-            )
-          }
-        }
-      </MyContext.Consumer> */}
-    </MyProvider>
-
-    {/* <TestRenderProps /> */}
-
-    {/* </div> */}
-  </div>,
-  root);
-
-console.log(<MyProvider>
-  <Message />
-</MyProvider>);
-
+TinyReact.render(<Counter />,root);
 
 
 

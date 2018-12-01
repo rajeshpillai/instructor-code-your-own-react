@@ -419,4 +419,57 @@ class TodoItemx extends Component {
 //   render(<TodoItemx title={new Date()} />, root);
 // }
 
-render(<TodoApp />, root);
+//render(<TodoApp />, root);
+
+
+class Counter extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      count:0
+    }
+  }
+  onClick(){
+    console.log("setState 1 ************************************");
+    this.setState({
+      count:this.state.count+1
+    },()=>{
+      console.log("callback 1 ********************************88")
+      this.setState({
+        count:this.state.count+1
+      })
+    })
+
+    console.log("setState 2 ************************************");
+    this.setState({
+      count:this.state.count+1
+    },()=>{
+      console.log("callback 2 ********************************88")
+      this.setState({
+        count:"aaaaaa" + this.state.count
+      })
+    })
+
+    // console.log("setState 3 ************************************");
+    // this.setState({
+    //   count:this.state.count+1
+    // },()=>{
+    //   console.log("callback 3 ********************************88")
+    //   this.setState({
+    //     count:this.state.count+1
+    //   })
+    // })
+
+  }
+  render() {
+    console.log("Render() called ***************************");
+    return (
+      <div>
+        <span>{this.state.count}</span>
+        <input type="button" value="Click" onClick={() =>{this.onClick()}}  />
+      </div>
+    ) 
+  }
+}
+
+render(<Counter />,root);
